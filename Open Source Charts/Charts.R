@@ -19,7 +19,7 @@ table <- list_airports()
 
 Locations <- read.csv("c:/users/jnicola/Documents/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
 
-LocationsRow <- c(14,17)
+LocationsRow <- c(17,14)
 
 cities <- list()
 
@@ -30,8 +30,9 @@ for (i in 1:2){
     mutate(value = as.numeric(value), datatype = "Forecast")%>%
     mutate(day = floor_date(date,unit = "day"),
            hour = hour(date)) %>%
-    mutate(day = as.character(day)) %>%
-    mutate(date = as.character(date))
+    mutate(date = as.character(date)) %>%
+    mutate(day = as.character(day))
+  
 
   cities[[i]] <- temp_wx
 
@@ -40,18 +41,21 @@ for (i in 1:2){
 FcstAll <-do.call(rbind,cities)
 
 all_normals <-read.csv("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
-  select(-X) %>%
-  mutate(date = ymd_hms(date)) %>%
-  mutate(date = as.character(date))
+  select(-X)
+#  mutate(date = ymd_hms(date)) %>%
+#  mutate(day = floor_date(date,unit = "day")) %>%
+#  mutate(date = as.character(date))
 
 fcst_norm <- rbind(all_normals,FcstAll) %>%
   mutate(date = ymd_hms(date)) %>%
-  filter(station %in% c("KPIT","KTPA")) %>%
-  filter(floor_date(date,unit ="day") < ymd(today())+days(9) & floor_date(date,unit ="day") > ymd(today()))
+  filter(floor_date(date,unit ="day") < ymd(today())+days(9) & floor_date(date,unit ="day") > ymd(today())) %>%
+  filter(station %in% c("KTPA")) 
 
 
-for (i in 1:2){
-  plots <- ggplot(filter(fcst_norm, station == Locations$short[StationsRow[i]]), aes(x=hour, y=value, col = datatype, group = datatype, linetype = datatype, size = datatype)) +
+
+
+for (i in 1:1){
+  plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), aes(x=hour, y=value, col = datatype, group = datatype, linetype = datatype, size = datatype)) +
     geom_line() +
     scale_color_manual(values=c( "red","black", "red"))+
     scale_linetype_manual(values=c("solid","longdash","dotted"))+
