@@ -49,19 +49,16 @@ all_normals <-read.csv("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Data/Temp_No
 fcst_norm <- rbind(all_normals,FcstAll) %>%
   mutate(date = ymd_hms(date)) %>%
   filter(floor_date(date,unit ="day") < ymd(today())+days(9) & floor_date(date,unit ="day") > ymd(today())) %>%
-  filter(station %in% c("KTPA")) 
+  filter(station %in% c("KTPA", "KPIT")) 
 
-
-
-
-for (i in 1:1){
+for (i in 1:2){
   plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), aes(x=hour, y=value, col = datatype, group = datatype, linetype = datatype, size = datatype)) +
     geom_line() +
     scale_color_manual(values=c( "red","black", "red"))+
     scale_linetype_manual(values=c("solid","longdash","dotted"))+
     scale_size_manual(values=c(1,1,1.5))+
     theme(legend.title=element_blank())+
-    labs(title = Stations[StationsRow[i],4], x="Hour of Day (0 is Midnight/12:00am)", y=expression(paste("Temperature ( ",degree ~ F," )"))) + 
+    labs(title = Locations[LocationsRow[i],4], x="Hour of Day (0 is Midnight/12:00am)", y=expression(paste("Temperature ( ",degree ~ F," )"))) + 
     facet_wrap(~day,ncol = 4, scales = "free_x") + 
     theme_bw(base_size = 15) +
     theme(plot.title = element_text(vjust = 2))+
@@ -70,7 +67,7 @@ for (i in 1:1){
     theme(axis.text.x  = element_text(size=7))+
     scale_x_continuous(breaks = c(seq(0,23,by=3)))
   
-  ggsave(plots, file = paste("C:\\Users\\jnicola\\Desktop\\Temp_Plot_",Stations[StationsRow[i],3],"_",Sys.Date(),".pdf",sep = ""), width = 10, height = 7)
+  ggsave(plots, file = paste("C:\\Users\\jnicola\\Desktop\\Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".pdf",sep = ""), width = 10, height = 7)
 }
 
 
