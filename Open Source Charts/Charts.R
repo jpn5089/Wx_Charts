@@ -35,10 +35,18 @@ for (i in 1:2){
   
 
   cities[[i]] <- temp_wx
-
 }
 
 FcstAll <-do.call(rbind,cities)
+
+slocation <- paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rdata",sep = "")
+
+save(FcstAll, file = slocation)
+
+
+today <- load(slocation)
+  
+yesterday <- load(paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".RData", sep = ""))
 
 all_normals <-read.csv("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
   select(-X)
@@ -66,8 +74,9 @@ for (i in 1:2){
     theme(axis.title.x = element_text(vjust=-0.25))+
     theme(axis.text.x  = element_text(size=7))+
     scale_x_continuous(breaks = c(seq(0,23,by=3)))
-  
+  print(plots)
   ggsave(plots, file = paste("C:\\Users\\jnicola\\Desktop\\Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".pdf",sep = ""), width = 10, height = 7)
 }
+
 
 
