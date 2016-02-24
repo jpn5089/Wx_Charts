@@ -10,11 +10,13 @@ library(reshape2)
 library(tidyr)
 library(scales)
 
+setwd("~/")
+
 rwunderground::set_api_key("d30db447d19d9927")
 
 table <- list_airports()
 
-Locations <- read.csv("c:/users/jnicola/Documents/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
+Locations <- read.csv("~/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
 
 LocationsRow <- c(17,14)
 
@@ -36,19 +38,19 @@ for (i in 1:2){
 
 FcstAll <-do.call(rbind,cities)
 
-slocation <- paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rda",sep = "")
+slocation <- paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rda",sep = "")
 
 saveRDS(FcstAll, file = slocation)
 
 today <- readRDS(slocation) %>%
   mutate(datatype = "Today's Forecast")
   
-yesterday <- readRDS(paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".Rda", sep = "")) %>%
+yesterday <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".Rda", sep = "")) %>%
   mutate(datatype = "Yesterday's Forecast")
 
 forecasts <- rbind(today, yesterday)
 
-all_normals <-read.csv("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
+all_normals <-read.csv("~/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
   select(-X)
 #  mutate(date = ymd_hms(date)) %>%
 #  mutate(day = floor_date(date,unit = "day")) %>%
@@ -76,7 +78,7 @@ for (i in 1:2){
     theme(axis.text.x  = element_text(size=7))+
     scale_x_continuous(breaks = c(seq(0,23,by=3)))
   print(plots)
-  ggsave(plots, file = paste("C:\\Users\\jnicola\\Desktop\\Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".pdf",sep = ""), width = 10, height = 7)
+  ggsave(plots, file = paste("C:\\Users\\jnicola\\Desktop\\Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
 }
 
 
