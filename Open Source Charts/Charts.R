@@ -1,14 +1,11 @@
 devtools::install_github("ALShum/rwunderground")
 library(rwunderground)
 library(ggplot2)
-library(plyr)
 library(dplyr)
 library(lubridate)
 library(RCurl)
-library(httr)
 library(data.table)
 library(devtools)
-library(XML)
 library(reshape2)
 library(tidyr)
 library(scales)
@@ -39,14 +36,23 @@ for (i in 1:2){
 
 FcstAll <-do.call(rbind,cities)
 
-slocation <- paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rdata",sep = "")
+practice <-do.call(rbind, cities)
 
-save(FcstAll, file = slocation)
+slocation <- paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rda",sep = "")
 
+dlocation <- paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_2.Rda" ,sep = "")
 
-today <- load(slocation)
+saveRDS(FcstAll, file = slocation)
+
+saveRDS(practice, file = dlocation)
+
+today <- readRDS(slocation) %>%
+  mutate(datatype = "Today's Forecast")
   
-yesterday <- load(paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".RData", sep = ""))
+yesterday <- readRDS(paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_2.Rda", sep = "")) %>%
+  mutate(datatype = "Yesterday's Forecast")
+
+forecasts <- rbind(today, yesterday)
 
 all_normals <-read.csv("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
   select(-X)
@@ -54,17 +60,18 @@ all_normals <-read.csv("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Data/Temp_No
 #  mutate(day = floor_date(date,unit = "day")) %>%
 #  mutate(date = as.character(date))
 
-fcst_norm <- rbind(all_normals,FcstAll) %>%
+fcst_norm <- rbind(all_normals,forecasts) %>%
   mutate(date = ymd_hms(date)) %>%
   filter(floor_date(date,unit ="day") < ymd(today())+days(9) & floor_date(date,unit ="day") > ymd(today())) %>%
   filter(station %in% c("KTPA", "KPIT")) 
 
 for (i in 1:2){
-  plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), aes(x=hour, y=value, col = datatype, group = datatype, linetype = datatype, size = datatype)) +
+  plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), aes(x=hour, y=value, col = datatype, group = datatype, linetype = datatype, size = datatype, alpha = datatype)) +
     geom_line() +
-    scale_color_manual(values=c( "red","black", "red"))+
-    scale_linetype_manual(values=c("solid","longdash","dotted"))+
-    scale_size_manual(values=c(1,1,1.5))+
+    scale_color_manual(values=c( "blue","red", "black"))+
+    scale_linetype_manual(values=c("solid","solid","dotted"))+
+    scale_size_manual(values=c(1.25,1.75,1.75))+
+    scale_alpha_manual(values = c(1,1,1))+
     theme(legend.title=element_blank())+
     labs(title = Locations[LocationsRow[i],4], x="Hour of Day (0 is Midnight/12:00am)", y=expression(paste("Temperature ( ",degree ~ F," )"))) + 
     facet_wrap(~day,ncol = 4, scales = "free_x") + 
