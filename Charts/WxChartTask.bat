@@ -1,0 +1,1 @@
+"C:\Program Files\R\R-3.2.1\bin\R.exe" CMD BATCH "C:\Users\jnicola\Desktop\R\WxCharts_Source.R"	
