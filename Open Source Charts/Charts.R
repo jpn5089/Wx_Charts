@@ -36,20 +36,14 @@ for (i in 1:2){
 
 FcstAll <-do.call(rbind,cities)
 
-practice <-do.call(rbind, cities)
-
 slocation <- paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rda",sep = "")
 
-dlocation <- paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_2.Rda" ,sep = "")
-
 saveRDS(FcstAll, file = slocation)
-
-saveRDS(practice, file = dlocation)
 
 today <- readRDS(slocation) %>%
   mutate(datatype = "Today's Forecast")
   
-yesterday <- readRDS(paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_2.Rda", sep = "")) %>%
+yesterday <- readRDS(paste("C:/Users/jnicola/Documents/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".Rda", sep = "")) %>%
   mutate(datatype = "Yesterday's Forecast")
 
 forecasts <- rbind(today, yesterday)
