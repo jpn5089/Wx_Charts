@@ -1,5 +1,4 @@
 library(ggplot2)
-library(plyr)
 library(dplyr)
 library(lubridate)
 library(RCurl)
@@ -11,14 +10,16 @@ library(reshape2)
 library(tidyr)
 library(scales)
 
-Stations <- read.csv("c:/users/jnicola/Desktop/Weather Charts/StationNames.csv",stringsAsFactors = FALSE)
+setwd("~/")
+
+Stations <- read.csv("~/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
 
 StationsRow <- c(6,14,1,13,7,16,5)
 
-normals_full <-read.csv("C:/Users/jnicola/Desktop/Weather Charts/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
+normals_full <-read.csv("~/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
   select(-X)
 
-fcast <- read.csv(file = paste("C:/Users/jnicola/Desktop/WxFcst/Forecast_Data_",Sys.Date(),".csv", sep = ""), stringsAsFactors = FALSE) %>%
+fcast <- read.csv(file = paste("T:\\Scheduling\\Power\\load forecasting\\zzz pjm files folder\\Weather/Forecast_Data_",Sys.Date(),".csv", sep = ""), stringsAsFactors = FALSE) %>%
   select(-X,-variable) 
 
 all <- rbind(normals_full,fcast) %>%
