@@ -1,19 +1,20 @@
-short,noaa,City,titles
-KABE,GHCND:USW00014737,Allentown,Normal vs Current and Previous Forecast - Allentown
-KAOO,GHCND:USW00014736,,
-KAVP,GHCND:USW00014777,,
-KBGM,GHCND:USW00004725,,
-KCAK,GHCND:USW00014895,Akron,Normal vs Current and Previous Forecast - Akron/Alliance
-KCLE,GHCND:USW00014820,Cleveland,Normal vs Current and Previous Forecast - Cleveland
-KCMH,GHCND:USW00014821,Columbus,Normal vs Current and Previous Forecast - Columbus
-KCVG,GHCND:USW00093814,,
-KDAY,GHCND:USW00093815,,
-KERI,GHCND:USW00014860,,
-KIPT,GHCND:USW00014778,,
-KMDT,GHCND:USW00014711,,
-KPHL,GHCND:USW00013739,Philadelphia,Normal vs Current and Previous Forecast - Philadelphia
-KPIT,GHCND:USW00094823,Pittsburgh,Normal vs Current and Previous Forecast - Pittsburgh
-KRDG,GHCND:USW00014712,,
-KTOL,GHCND:USW00094830,Toledo,Normal vs Current and Previous Forecast - Toledo
-KTPA,GHCND:USW00012842,Tampa,Normal vs Current and Previous Forecast - Tampa
-KPIE, GHCND:USW00012873,Clearwater,Normal vs Current and Previous Forecast - Clearwater/St. Pete
+short,noaa,City,titles,timezone
+KABE,GHCND:USW00014737,Allentown,Normal vs Current and Previous Forecast - Allentown,America/New_York
+KAOO,GHCND:USW00014736,,,
+KAVP,GHCND:USW00014777,,,
+KBGM,GHCND:USW00004725,,,
+KCAK,GHCND:USW00014895,Akron,Normal vs Current and Previous Forecast - Akron/Alliance,
+KCLE,GHCND:USW00014820,Cleveland,Normal vs Current and Previous Forecast - Cleveland,
+KCMH,GHCND:USW00014821,Columbus,Normal vs Current and Previous Forecast - Columbus,
+KCVG,GHCND:USW00093814,,,
+KDAY,GHCND:USW00093815,,,
+KERI,GHCND:USW00014860,,,
+KIPT,GHCND:USW00014778,,,
+KMDT,GHCND:USW00014711,,,
+KPHL,GHCND:USW00013739,Philadelphia,Normal vs Current and Previous Forecast - Philadelphia,
+KPIT,GHCND:USW00094823,Pittsburgh,Normal vs Current and Previous Forecast - Pittsburgh,America/New_York
+KRDG,GHCND:USW00014712,,,
+KTOL,GHCND:USW00094830,Toledo,Normal vs Current and Previous Forecast - Toledo,
+KTPA,GHCND:USW00012842,Tampa,Normal vs Current and Previous Forecast - Tampa,America/New_York
+KPIE,GHCND:USW00012873,Clearwater,Normal vs Current and Previous Forecast - Clearwater/St. Pete,
+KJAC,GHCND:USW00024156,Jackson Hole,Normal vs Current and Previous Forecast - Jackson Hole,America/Denver
