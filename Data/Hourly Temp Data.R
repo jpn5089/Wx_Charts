@@ -5,7 +5,7 @@ library(ggplot2)
 
 options(noaakey = "insert key here")
 
-Stations <- read.csv("c:/users/jnicola/desktop/Weather Charts/StationNames.csv",stringsAsFactors = FALSE)
+Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
 
 #codes <- Stations$noaa
 
