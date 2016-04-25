@@ -10,14 +10,15 @@ library(reshape2)
 library(tidyr)
 library(scales)
 
-setwd("~/")
+#setwd("~/")
 
 rwunderground::set_api_key("d30db447d19d9927")
 
 #table <- list_airports()
 #
 
-Locations <- read.csv("~/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
+# pointed this to the raw data on the web - this way we don't ever need to worry about the file path!
+Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
 
 LocationsRow <- c(17,14,19)
 
