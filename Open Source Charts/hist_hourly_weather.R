@@ -34,10 +34,14 @@ names(selected_data) <- c("USAFID", "WBAN", "YR", "M",
                  "ATM.PRES")
 
 # In UTC time...so need to subtract 4 hours to get to EST local
+# TEMP and DEW.POINT in degrees F
+# ATM.PRES in mb
+# WIND.SPD in mph
 final_data <- selected_data %>%
   mutate_each(funs(replace(., . %in% c(999,9999,99999), NA))) %>%
   mutate (TEMP = ((TEMP/10)*(9/5) +32),
           DEW.POINT = ((DEW.POINT/10)*(9/5) +32),
-          ATM.PRES = ATM.PRES/10)
+          ATM.PRES = ATM.PRES/10,
+          WIND.SPD = round(((WIND.SPD/10)*2.23694), 0))
 
 
