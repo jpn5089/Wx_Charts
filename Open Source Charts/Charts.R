@@ -19,11 +19,11 @@ rwunderground::set_api_key("d30db447d19d9927")
 # pointed this to the raw data on the web - this way we don't ever need to worry about the file path!
 Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
 
-LocationsRow <- c(17,14,19)
+LocationsRow <- c(17,14,19,20)
 
 cities <- list()
 
-for (i in 1:3){
+for (i in 1:4){
   temp_wx <- hourly10day(set_location(airport_code = as.character(Locations[LocationsRow[i],1]))) %>%
     select(date,value = temp) %>%
     mutate(date = ymd_hms(date)) %>%
@@ -55,7 +55,7 @@ saveRDS(FcstAll, file = slocation)
 today <- readRDS(slocation) %>%
   mutate(datatype = "Today's Forecast")
   
-yesterday <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".Rda", sep = "")) %>%
+yesterday <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rda", sep = "")) %>%
   mutate(datatype = "Yesterday's Forecast")
 
 forecasts <- rbind(today, yesterday) %>%
@@ -72,9 +72,9 @@ fcst_norm <- rbind(all_normals,forecasts) %>%
   mutate(date = ymd_hms(date)) %>%
   mutate(day = floor_date(date,unit = "day")) %>%
   filter(floor_date(date,unit ="day") < ymd(today())+days(9) & floor_date(date,unit ="day") > ymd(today())) %>%
-  filter(station %in% c("KTPA", "KPIT","KJAC")) 
+  filter(station %in% c("KTPA", "KPIT","KJAC", "KPVM")) 
 
-for (i in 1:3){
+for (i in 1:4){
   plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), aes(x=hour, y=value, col = datatype, group = datatype, linetype = datatype, size = datatype, alpha = datatype)) +
     geom_line() +
     scale_color_manual(values=c( "blue","red", "black"))+
