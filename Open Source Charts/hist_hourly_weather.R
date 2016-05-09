@@ -13,17 +13,17 @@ pa.list <- st %>%
 
 # download the historic file
 path <- sprintf("ftp://ftp.ncdc.noaa.gov/pub/data/noaa/%s/%s-%s-2016.gz",2016,pa.list$USAF[1],pa.list$WBAN[1])
-download.file(path, destfile = "C:/Users/John/Documents/GitHub/Wx_Charts/Open Source Charts/data.gz")
+download.file(path, destfile = "C://Users/John/Desktop/data.gz")
 
 # unzip
 library(R.utils)
-gunzip("C:/Users/John/Documents/GitHub/Wx_Charts/Open Source Charts/data.gz")
+gunzip("C:/Users/John/Desktop/data.gz")
 #will save a text file under the same name as the zip file
 column.widths <- c(4, 6, 5, 4, 2, 2, 2, 2, 1, 6,
                    7, 5, 5, 5, 4, 3, 1, 1, 4, 1, 5, 1, 1, 1, 6,
                    1, 1, 1, 5, 1, 5, 1, 5, 1)
 
-raw_data <- read.fwf("C:/Users/John/Documents/GitHub/Wx_Charts/Open Source Charts/data", column.widths)
+raw_data <- read.fwf("C:/Users/John/Desktop/data", column.widths)
 
 selected_data <- raw_data[, c(2:8, 10:11, 13, 16, 19, 29,
                   31, 33)]
