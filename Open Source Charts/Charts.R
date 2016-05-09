@@ -55,7 +55,7 @@ saveRDS(FcstAll, file = slocation)
 today <- readRDS(slocation) %>%
   mutate(datatype = "Today's Forecast")
   
-yesterday <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rda", sep = "")) %>%
+yesterday <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".Rda", sep = "")) %>%
   mutate(datatype = "Yesterday's Forecast")
 
 forecasts <- rbind(today, yesterday) %>%
@@ -72,7 +72,7 @@ fcst_norm <- rbind(all_normals,forecasts) %>%
   mutate(date = ymd_hms(date)) %>%
   mutate(day = floor_date(date,unit = "day")) %>%
   filter(floor_date(date,unit ="day") < ymd(today())+days(9) & floor_date(date,unit ="day") > ymd(today())) %>%
-  filter(station %in% c("KTPA", "KPIT","KJAC", "KPVM")) 
+  filter(station %in% c("KTPA", "KPIT","KJAC", "KBHB")) 
 
 for (i in 1:4){
   plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), aes(x=hour, y=value, col = datatype, group = datatype, linetype = datatype, size = datatype, alpha = datatype)) +
