@@ -3,11 +3,11 @@ library(rwunderground)
 library(ggplot2)
 library(dplyr)
 library(lubridate)
-#library(RCurl)
-#library(data.table)
-#library(devtools)
-#library(reshape2)
-#library(tidyr)
+library(RCurl)
+library(data.table)
+library(devtools)
+library(reshape2)
+library(tidyr)
 library(scales)
 
 #setwd("~/")
@@ -15,15 +15,16 @@ library(scales)
 rwunderground::set_api_key("d30db447d19d9927")
 
 #table <- list_airports()
+#
 
 # pointed this to the raw data on the web - this way we don't ever need to worry about the file path!
 Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
 
-LocationsRow <- c(17,14,19,20)
+LocationsRow <- c(17,14,19)
 
 cities <- list()
 
-for (i in 1:4){
+for (i in 1:3){
   temp_wx <- hourly10day(set_location(airport_code = as.character(Locations[LocationsRow[i],1]))) %>%
     select(date,value = temp) %>%
     mutate(date = ymd_hms(date)) %>%
@@ -48,20 +49,21 @@ FcstAll <- FcstAll %>%
   mutate(day = floor_date(date,unit = "day"),
                   hour = hour(date))
 
-slocation <- paste("/Users/cmohan/Dropbox/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rda",sep = "")
+slocation <- paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rda",sep = "")
 
 saveRDS(FcstAll, file = slocation)
 
 today <- readRDS(slocation) %>%
-  mutate(datatype = "Today's Forecast") %>% select(-X) 
+  mutate(datatype = "Today's Forecast")
   
-yesterday <- readRDS(paste("/Users/cmohan/Dropbox/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_2016-02-29.Rda", sep = "")) %>%
+yesterday <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".Rda", sep = "")) %>%
   mutate(datatype = "Yesterday's Forecast")
 
 forecasts <- rbind(today, yesterday) %>%
+  select(-X) %>%
   mutate(date = ymd_hms(date))
 
-all_normals <-read.csv("/Users/cmohan/Dropbox/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
+all_normals <-read.csv("~/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
   select(-X) %>%
   mutate(date = mdy_hm(date)) %>%
   mutate(day = floor_date(date,unit = "day"))
@@ -71,9 +73,9 @@ fcst_norm <- rbind(all_normals,forecasts) %>%
   mutate(date = ymd_hms(date)) %>%
   mutate(day = floor_date(date,unit = "day")) %>%
   filter(floor_date(date,unit ="day") < ymd(today())+days(9) & floor_date(date,unit ="day") > ymd(today())) %>%
-  filter(station %in% c("KTPA", "KPIT","KJAC", "KBHB")) 
+  filter(station %in% c("KTPA", "KPIT","KJAC")) 
 
-for (i in 1:4){
+for (i in 1:3){
   plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), aes(x=hour, y=value, col = datatype, group = datatype, linetype = datatype, size = datatype, alpha = datatype)) +
     geom_line() +
     scale_color_manual(values=c( "blue","red", "black"))+
@@ -90,7 +92,7 @@ for (i in 1:4){
     theme(axis.text.x  = element_text(size=7))+
     scale_x_continuous(breaks = c(seq(0,23,by=3)))
   print(plots)
-  ggsave(plots, file = paste("/Users/cmohan/Desktop/Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
+  ggsave(plots, file = paste("C:\\Users\\John\\Desktop\\Temp_Plots\\Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
 }
 
 

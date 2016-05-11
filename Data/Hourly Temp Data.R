@@ -3,7 +3,7 @@ library(lubridate)
 library(rnoaa)
 library(ggplot2)
 
-options(noaakey = "gOTjkNrzDlVAafWzJyICPLKaWmwXpMoL")
+options(noaakey = "insert key here")
 
 Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
 
@@ -13,11 +13,11 @@ Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames
 #hours <- seq(0,23)
 #temps <- c("ATSI_temp","DUQ_temp","PPL_temp","PECO_temp","AEP_temp","Toledo_temp","Akron_temp")
 
-StationsRow <- c(6,20)
+StationsRow <- c(6,14,1,13,7,16,5)
 
 allData <- list()
 
-for (i in 1:2){
+for (i in 1:7){
   
   jan_normals <- ncdc(datasetid='NORMAL_HLY', stationid = as.character(Stations[StationsRow[i],2]), 
                       datatypeid = "HLY-TEMP-NORMAL", startdate = '2010-01-01', enddate = '2010-02-01', limit = 1000)
@@ -74,7 +74,5 @@ for (i in 1:2){
 
 normalAll <-do.call(rbind,allData)
 
-write.csv(normalAll, file = "C:\\Users\\John\\Desktop\\Temp_Norm.csv")
-
-#write.csv(normalAll, file = "C:\Users\John\Documents\GitHub\Wx_Charts\Data\Temp_Normals.csv")
+write.csv(normalAll, file = "C:/Users/jnicola/Desktop/Weather Charts/Temp_Normals.csv")
 
