@@ -48,10 +48,15 @@ FcstAll <- FcstAll %>%
   mutate(day = floor_date(date,unit = "day"),
                   hour = hour(date))
 
+<<<<<<< HEAD
 slocation <- paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".csv",sep = "")
+=======
+slocation <- paste("/Users/cmohan/Dropbox/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".Rda",sep = "")
+>>>>>>> origin/master
 
 write.csv(FcstAll, file = slocation)
 
+<<<<<<< HEAD
 today <- read.csv(slocation) %>%
   mutate(datatype = "Today's Forecast")
   
@@ -60,9 +65,18 @@ yesterday <- read.csv(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast
 
 forecasts <- rbind(today, yesterday) %>%
   select(-X, -X.1) %>%
+=======
+today <- readRDS(slocation) %>%
+  mutate(datatype = "Today's Forecast") %>% select(-X) 
+  
+yesterday <- readRDS(paste("/Users/cmohan/Dropbox/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_2016-02-29.Rda", sep = "")) %>%
+  mutate(datatype = "Yesterday's Forecast")
+
+forecasts <- rbind(today, yesterday) %>%
+>>>>>>> origin/master
   mutate(date = ymd_hms(date))
 
-all_normals <-read.csv("~/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
+all_normals <-read.csv("/Users/cmohan/Dropbox/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
   select(-X) %>%
   mutate(date = mdy_hm(date)) %>%
   mutate(day = floor_date(date,unit = "day"))
@@ -91,7 +105,7 @@ for (i in 1:3){
     theme(axis.text.x  = element_text(size=7))+
     scale_x_continuous(breaks = c(seq(0,23,by=3)))
   print(plots)
-  ggsave(plots, file = paste("C:\\Users\\John\\Desktop\\Temp_Plots\\Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
+  ggsave(plots, file = paste("/Users/cmohan/Desktop/Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
 }
 
 
