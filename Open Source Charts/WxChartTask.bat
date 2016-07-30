@@ -1,0 +1,1 @@
+"C:\Program Files\R\R-3.2.3\bin\R.exe" CMD BATCH "C:\Users\John\Documents\GitHub\Wx_Charts\Open Source Charts\Charts.R"	

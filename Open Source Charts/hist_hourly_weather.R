@@ -45,8 +45,9 @@ final_data <- selected_data %>%
           WIND.SPD = round(((WIND.SPD/10)*2.23694), 0))
 
 out <- list()
+final_data <- list(final_data)
 
-out <- final_data
+out[] <- final_data
 
 final_data <- do.call(rbind,out) %>%
   group_by(YR, M, D, HR) %>%
