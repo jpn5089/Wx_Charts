@@ -8,7 +8,7 @@
 #' the \code{scales = "free"} argument, they should not be used this way.
 #' A more robust approach is to the grid package grid.draw(), rbind() and ggplotGrob() to create a grid of 
 #' individual plots where the plot axes are properly aligned within the grid.
-#' Thanks to https://rpubs.com/MarkusLoew/13295 for the grid.arrange() idea.
+# Thanks to https://rpubs.com/MarkusLoew/13295 for the grid.arrange() idea.
 
 #devtools::install_github("ALShum/rwunderground")
 library(rwunderground)
