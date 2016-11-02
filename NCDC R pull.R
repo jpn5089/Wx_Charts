@@ -14,7 +14,7 @@ library(lubridate)
 library(rnoaa)
 library(ggplot2)
 
-options(noaakey = "gOTjkNrzDlVAafWzJyICPLKaWmwXpMoL")
+options(noaakey = "yours")
 
 rawdata <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823",
              startdate = "1993-03-15", enddate = "1993-03-19", limit = 1000)
