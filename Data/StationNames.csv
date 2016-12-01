@@ -12,7 +12,7 @@ KERI,GHCND:USW00014860,,,,
 KIPT,GHCND:USW00014778,,,,
 KMDT,GHCND:USW00014711,,,,
 KPHL,GHCND:USW00013739,Philadelphia,Normal vs Current and Previous Forecast - Philadelphia,,
-KPIT,GHCND:USW00094823,Pittsburgh,Normal vs Current and Previous Forecast - Pittsburgh,America/New_York,5
+KPIT,GHCND:USW00094823,"Pittsburgh, PA",Normal vs Current and Previous Forecast - Pittsburgh,America/New_York,5
 KRDG,GHCND:USW00014712,,,,
 KTOL,GHCND:USW00094830,Toledo,Normal vs Current and Previous Forecast - Toledo,,
 KTPA,GHCND:USW00012842,Tampa,Normal vs Current and Previous Forecast - Tampa,America/New_York,5
@@ -20,3 +20,8 @@ KPIE,GHCND:USW00012873,Clearwater,Normal vs Current and Previous Forecast - Clea
 KJAC,GHCND:USW00024156,Jackson Hole,Normal vs Current and Previous Forecast - Jackson Hole,America/Denver,7
 KBHB,GHCND:USW00014764,Bar Harbor,Normal vs Current and Previous Forecast - Bar Harbor/Acadia NP,America/New_York,5
 KLBB,GHCND:USW00023042,Lubbock,"Normal vs Current and Previous Forecast - Lubbock, TX",CST6CDT,6
+KBOS,,"Boston, MA",,,
+KMEM,,"Memphis, TN",,,
+KMSP,,"Minneapolis, MN",,,
+KOKC,,"Oklahoma City, OK",,,
+KSLC,,"Salt Lake City, UT",,,
