@@ -9,12 +9,16 @@
 #WSF2 = Fastest 2-minute wind speed (miles per hour or  meters per second as per user preference) 
 #WSF5 = Fastest 5-second wind speed (miles per hour or  meters per second as per user preference) 
 
+#y <- ncdc_stations(datasetid='NORMAL_HLY', limit = 1000)
+#Norms_HLY_Stations <- y$data
+
 library(dplyr)
 library(lubridate)
 library(rnoaa)
 library(ggplot2)
 
-options(noaakey = "yours")
+options(noaakey = ...)
+stations <- ncdc_stations()
 
 rawdata <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823",
              startdate = "1993-03-15", enddate = "1993-03-19", limit = 1000)
