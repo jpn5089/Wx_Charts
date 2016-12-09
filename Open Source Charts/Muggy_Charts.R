@@ -25,22 +25,22 @@ library(grid)
 
 #setwd("~/")
 
-rwunderground::set_api_key("d30db447d19d9927")
+rwunderground::set_api_key(...)
 
 #table <- list_airports()
 
 # pointed this to the raw data on the web - this way we don't ever need to worry about the file path!
 Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
 
-LocationsRow <- c(17,14,20)
+LocationsRow <- c(17,14)
 
 cities <- list()
 
-for (i in 1:3){
+for (i in 1:2){
   muggy_wx <- hourly10day(set_location(airport_code = as.character(Locations[LocationsRow[i],1]))) %>%
     select(date, dew = dew_pt, hum = humidity) %>%
     mutate(date = ymd_hms(date)) %>%
-    mutate(format(date, tz = as.character(Locations[LocationsRow[i],5]))) %>%
+    #mutate(format(date, tz = as.character(Locations[LocationsRow[i],5]))) %>%
     mutate(station = as.character(Locations[LocationsRow[i],1])) %>%
     mutate(dew = as.numeric(dew), datatype = "Forecast")%>%
     mutate(hum = as.numeric(hum), datatype = "Forecast")%>%
@@ -55,7 +55,7 @@ for (i in 1:3){
 
 FcstMuggy <-do.call(rbind,cities)
 
-colnames(FcstMuggy) <- c("X", "dew", "hum", "date", "station", "datatype", "day", "hour")
+#colnames(FcstMuggy) <- c("X", "dew", "hum", "date", "station", "datatype", "day", "hour")
 
 FcstMuggy <- FcstMuggy %>% 
   mutate(date = ymd_hms(date)) %>%
@@ -73,16 +73,16 @@ yesterday_muggy <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Mug
   mutate(datatype = "Yesterday's Forecast")
 
 forecasts_muggy <- rbind(today_muggy, yesterday_muggy) %>%
-  select(-X) %>%
+  #select(-X) %>%
   mutate(date = ymd_hms(date))
 
 FcstMuggy <- forecasts_muggy %>%
   mutate(date = ymd_hms(date)) %>%
   mutate(day = floor_date(date,unit = "day")) %>%
   filter(floor_date(date,unit ="day") <= ymd(today())+days(4) & floor_date(date,unit ="day") >= ymd(today())+days(1)) %>%
-  filter(station %in% c("KPIT", "KBHB", "KTPA")) 
+  filter(station %in% c("KPIT","KTPA")) 
 
-for (i in 1:3){
+for (i in 1:2){
   plot1 <- ggplot(filter(FcstMuggy, station == Locations$short[LocationsRow[i]]), aes(x = hour, y = dew, col = datatype, group = datatype, linetype = datatype, size = datatype, alpha = datatype)) +
     geom_line() +
     scale_color_manual(values=c( "dark green","green"))+
@@ -113,10 +113,10 @@ for (i in 1:3){
     print(plot2)    
 
 grid.draw(rbind(ggplotGrob(plot1), ggplotGrob(plot2), size = "last"))
+
+
+ggsave(plot1, file = paste("C:\\Users\\John\\Desktop\\Muggy_Plots\\Muggy_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
 }
-
-#ggsave(plots, file = paste("C:\\Users\\John\\Desktop\\Temp_Plots\\Muggy_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
-
 
 
 
