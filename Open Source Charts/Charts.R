@@ -3,24 +3,17 @@ library(rwunderground)
 library(ggplot2)
 library(dplyr)
 library(lubridate)
-#library(RCurl)
-#library(data.table)
-#library(devtools)
-#library(reshape2)
-#library(tidyr)
 library(scales)
+library(plotly)
+library(tibble)
 
 #setwd("~/")
-
-rwunderground::set_api_key(...)
-
 #table <- list_airports()
 
-# pointed this to the raw data on the web - this way we don't ever need to worry about the file path!
+rwunderground::set_api_key(Sys.getenv("GET_API_KEY"))
+
 Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
-
 LocationsRow <- c(17,14)
-
 cities <- list()
 
 for (i in 1:2){
@@ -38,7 +31,6 @@ for (i in 1:2){
     mutate(value = as.numeric(value), datatype = "Forecast")%>%
     mutate(date = as.character(date)) %>%
     mutate(day = as.character(day))
-  
   
   cities[[i]] <- temp_wx
 }
@@ -80,25 +72,28 @@ fcst_norm <- rbind(all_normals,forecasts) %>%
   filter(station %in% c("KTPA", "KPIT")) 
 
 for (i in 1:2){
-  plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), aes(x=hour, y=value, col = datatype, group = datatype, linetype = datatype, size = datatype, alpha = datatype)) +
+  plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), 
+                  aes(x=hour, y=value, col = datatype, group = datatype,
+                      linetype = datatype, size = datatype, alpha = datatype)) +
     geom_line() +
     scale_color_manual(values=c( "blue","red", "black"))+
     scale_linetype_manual(values=c("solid","solid","dotted"))+
     scale_size_manual(values=c(1.25,1.75,1.75))+
     scale_alpha_manual(values = c(1,1,1))+
-    theme(legend.title=element_blank())+
-    labs(title = Locations[LocationsRow[i],4], x="Hour of Day (0 is Midnight/12:00am)", y=expression(paste("Temperature ( ",degree ~ F," )"))) + 
+    labs(title = Locations[LocationsRow[i],4],
+         x="Local Time (0 is 12:00am)", 
+         y=expression(paste("Temperature ( ",degree ~ F," )")),
+         caption = "(Sources: Weather Underground and NOAA)") + 
     facet_wrap(~day,ncol = 4, scales = "free_x") + 
     theme_bw(base_size = 15) +
+    theme(plot.title = element_text(hjust = 0.5)) +
     theme(plot.title = element_text(vjust = 2))+
     theme(legend.title = element_blank())+
     theme(axis.title.x = element_text(vjust=-0.25))+
     theme(axis.text.x  = element_text(size=7))+
+    theme(plot.caption = element_text(size=9.5))
     scale_x_continuous(breaks = c(seq(0,23,by=3)))
   print(plots)
   ggsave(plots, file = paste("C:\\Users\\John\\Desktop\\Temp_Plots\\Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
 }
-
-
-
 

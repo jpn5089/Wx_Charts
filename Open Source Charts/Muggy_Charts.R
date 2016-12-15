@@ -15,25 +15,18 @@ library(rwunderground)
 library(ggplot2)
 library(dplyr)
 library(lubridate)
-#library(RCurl)
-#library(data.table)
-#library(devtools)
-#library(reshape2)
-#library(tidyr)
 library(scales)
 library(grid)
+library(plotly)
+library(tibble)
 
 #setwd("~/")
-
-rwunderground::set_api_key(...)
-
 #table <- list_airports()
 
-# pointed this to the raw data on the web - this way we don't ever need to worry about the file path!
+rwunderground::set_api_key(Sys.getenv("GET_API_KEY"))
+
 Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
-
 LocationsRow <- c(17,14)
-
 cities <- list()
 
 for (i in 1:2){
@@ -48,7 +41,6 @@ for (i in 1:2){
            hour = hour(date)) %>%
     mutate(date = as.character(date)) %>%
     mutate(day = as.character(day))
-  
   
   cities[[i]] <- muggy_wx
 }
@@ -91,12 +83,15 @@ for (i in 1:2){
     scale_alpha_manual(values = c(1,1)) +
     facet_wrap(~day,ncol = 4, scales = "free_x") +
     scale_x_continuous(breaks = c(seq(0,23,by=3))) +
-    labs(title = Locations[LocationsRow[i],3], x = "Hour of Day (0 is Midnight/12:00am)", y = expression(paste("Dew Point (",degree ~ F,")"))) +
+    labs(title = Locations[LocationsRow[i],3], 
+         x = "Local Time (0 is 12:00am)",
+         y = expression(paste("Dew Point (",degree ~ F,")")),
+         caption = "(Source: Weather Underground)") +
     theme_bw(base_size = 15) +
+    theme(plot.caption = element_text(size = 9.5)) +
+    theme(plot.title = element_text(hjust = 0.5)) +
     theme(plot.title = element_text(vjust = 2)) +
-    theme(legend.title=element_blank())
-    
-  
+    theme(legend.title = element_blank()) 
 
   plot2 <- ggplot(filter(FcstMuggy, station == Locations$short[LocationsRow[i]]), aes(x = hour, y = hum, col = datatype, group = datatype, linetype = datatype, size = datatype, alpha = datatype)) +
     geom_line() +
@@ -106,11 +101,10 @@ for (i in 1:2){
     scale_alpha_manual(values = c(1,1)) +
     facet_wrap(~day,ncol = 4, scales = "free_x") +
     scale_x_continuous(breaks = c(seq(0,23,by=3))) +
-    labs(x = "Hour of Day (0 is Midnight/12:00am)", y = expression(paste("Humidity (%)"))) +
+    labs(x = "Local Time (0 is 12:00am)", y = expression(paste("Humidity (%)"))) +
     theme_bw(base_size = 15) +
     theme(plot.title = element_text(vjust = 2)) +
-    theme(legend.title=element_blank())
-    print(plot2)    
+    theme(legend.title = element_blank())
 
 grid.draw(rbind(ggplotGrob(plot1), ggplotGrob(plot2), size = "last"))
 

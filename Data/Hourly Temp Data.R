@@ -3,7 +3,7 @@ library(lubridate)
 library(rnoaa)
 library(ggplot2)
 
-options(noaakey = "gOTjkNrzDlVAafWzJyICPLKaWmwXpMoL")
+options(noaakey = Sys.getenv("NOAAKEY"))
 
 Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
 

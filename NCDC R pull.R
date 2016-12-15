@@ -17,7 +17,7 @@ library(lubridate)
 library(rnoaa)
 library(ggplot2)
 
-options(noaakey = ...)
+options(noaakey = Sys.getenv("NOAAKEY"))
 stations <- ncdc_stations()
 
 rawdata <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823",
