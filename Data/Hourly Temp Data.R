@@ -13,7 +13,7 @@ Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames
 #hours <- seq(0,23)
 #temps <- c("ATSI_temp","DUQ_temp","PPL_temp","PECO_temp","AEP_temp","Toledo_temp","Akron_temp")
 
-StationsRow <- c(6,20)
+StationsRow <- c(19,21)
 
 allData <- list()
 
@@ -61,7 +61,7 @@ for (i in 1:2){
                    jul_normals[[2]] %>% filter(month(date) != 8),aug_normals[[2]] %>% filter(month(date) != 9), 
                    sep_normals[[2]] %>% filter(month(date) != 10),oct_normals[[2]] %>% filter(month(date) != 11),
                    nov_normals[[2]] %>% filter(month(date) != 12),dec_normals[[2]] %>% filter(month(date) != 1)) %>%
-    mutate(date = ymd_hms(gsub("T"," ",date)) + years(6),
+    mutate(date = ymd_hms(gsub("T"," ",date)) + years(7),
            value = (value/10) ) %>%
     select(date,station,value) %>%
     mutate(value = as.numeric(value), datatype = "Normal")%>%
