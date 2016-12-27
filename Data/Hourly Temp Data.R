@@ -13,7 +13,7 @@ Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames
 #hours <- seq(0,23)
 #temps <- c("ATSI_temp","DUQ_temp","PPL_temp","PECO_temp","AEP_temp","Toledo_temp","Akron_temp")
 
-StationsRow <- c(19,21)
+StationsRow <- c(32,33)
 
 allData <- list()
 
