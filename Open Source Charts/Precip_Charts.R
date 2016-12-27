@@ -89,17 +89,18 @@ for (i in 1:2){
     scale_alpha_manual(values = c(1,1)) +
     facet_wrap(~day,ncol = 5, scales = "free_x") +
     scale_x_continuous(breaks = c(seq(0,23,by=3))) +
-    labs(x = "Local Time (0 is 12:00am)", y = "Rainfall (inches)",
+    labs(title = Locations[LocationsRow[i],3], x = "Local Time (0 is 12:00am)", 
+         y = "Rainfall (inches)",
          caption = "(Source: Weather Underground)") +
     theme_bw(base_size = 15) +
+    theme(plot.title = element_text(hjust = 0.5)) +
     theme(plot.title = element_text(vjust = 2)) +
     theme(plot.caption = element_text(size=9.5)) +
     theme(legend.title=element_blank())
   print(plot2)
   
   grid.draw(rbind(ggplotGrob(plot1), ggplotGrob(plot2), size = "last"))
-}  
   
-  #ggsave(plot1, file = paste("C:\\Users\\John\\Desktop\\Muggy_Plots\\Muggy_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
-#}
+  ggsave(plot2, file = paste("C:\\Users\\John\\Desktop\\Precip_Plots\\Precip_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
+}
 

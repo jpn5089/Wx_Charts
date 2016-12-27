@@ -2,14 +2,10 @@
 
 #https://github.com/hrbrmstr/darksky
 
-#https://public.tableau.com/views/TornadoDensity-AlternateHexbins/TornadoDensity-Alternatehexbins?:showVizHome=no
-
-#https://www.blackrock.com/investing/literature/whitepaper/bii-climate-change-2016-us.pdf
-
-#https://www.ametsoc.org/cwwce/index.cfm/committees/committee-on-financial-weatherclimate-risk-management-comm/terms-of-reference/
-
 #https://rstudio.github.io/tensorflow/
 #https://spark.apache.org/docs/latest/sparkr.html
+
+#http://forecastwatch.com/static/Three_Region_Overview_2010_201606.pdf
 
 library(darksky)
 library(purrr)
@@ -26,7 +22,7 @@ station_info <- read.csv(file = "C:\\Users\\John\\Documents\\GitHub\\Wx_Charts\\
 
 now <- get_current_forecast(43.2672, -70.8617)
 plot(now)
-forecast <- now$hourly
+forecast <- now$daily
 
 ########################################################################
 
