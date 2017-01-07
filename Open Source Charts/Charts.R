@@ -13,10 +13,10 @@ library(tibble)
 rwunderground::set_api_key(Sys.getenv("GET_API_KEY"))
 
 Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
-LocationsRow <- c(17,14)
+LocationsRow <- c(17,14,32, 33)
 cities <- list()
 
-for (i in 1:2){
+for (i in 1:4){
   temp_wx <- hourly10day(set_location(airport_code = as.character(Locations[LocationsRow[i],1]))) %>%
     select(date,value = temp) %>%
     mutate(date = ymd_hms(date)) %>%
@@ -69,9 +69,9 @@ fcst_norm <- rbind(all_normals,forecasts) %>%
   mutate(date = ymd_hms(date)) %>%
   mutate(day = floor_date(date,unit = "day")) %>%
   filter(floor_date(date,unit ="day") <= ymd(today())+days(8) & floor_date(date,unit ="day") >= ymd(today())+days(1)) %>%
-  filter(station %in% c("KTPA", "KPIT")) 
+  filter(station %in% c("KTPA", "KPIT", "KMCO", "KDAB")) 
 
-for (i in 1:2){
+for (i in 1:4){
   plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), 
                   aes(x=hour, y=value, col = datatype, group = datatype,
                       linetype = datatype, size = datatype, alpha = datatype)) +
@@ -83,7 +83,7 @@ for (i in 1:2){
     labs(title = Locations[LocationsRow[i],4],
          x="Local Time (0 is 12:00am)", 
          y=expression(paste("Temperature ( ",degree ~ F," )")),
-         caption = "(Sources: Weather Underground and NOAA)") + 
+         caption = "(Sources: Weather Underground and NCEI (formerly NCDC))") + 
     facet_wrap(~day,ncol = 4, scales = "free_x") + 
     theme_bw(base_size = 15) +
     theme(plot.title = element_text(hjust = 0.5)) +
