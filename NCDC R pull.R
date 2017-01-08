@@ -9,9 +9,6 @@
 #WSF2 = Fastest 2-minute wind speed (miles per hour or  meters per second as per user preference) 
 #WSF5 = Fastest 5-second wind speed (miles per hour or  meters per second as per user preference) 
 
-#y <- ncdc_stations(datasetid='NORMAL_HLY', limit = 1000)
-#Norms_HLY_Stations <- y$data
-
 library(dplyr)
 library(lubridate)
 library(rnoaa)
@@ -83,23 +80,45 @@ weather5 <- rbind(temps, winds, precip, snow_depth, snowfall)
 
 full <- rbind(weather1, weather2, weather3, weather4, weather5) 
 
+#http://theanalyticalminds.blogspot.pt/2015/02/part-2-data-preparation.html
+#https://rpubs.com/cfarmer/124829
+
 rain <- filter(full, datatype == "PRCP")
+colnames(rain)[4] <- "Total"
 
 TAVG <- filter(full, datatype == "TAVG")
 
-ggplot(rain, aes(date, value)) +
-  geom_point(aes(color=value)) +
+ggplot(rain, aes(date, Total)) +
+  geom_point(aes(color=Total)) +
   geom_smooth(color="blue", size=1) +
   scale_colour_gradient() +
-  xlab("Date") + ylab("Rain (in)") +
-  ggtitle("Daily rain amount")
+  labs(title = "2016 Daily Precipitation",
+       y="Rain (in)",
+       subtitle = "Pittsburgh",
+       caption = "Data Source: NCEI (formerly NCDC)") + 
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(plot.subtitle = element_text(hjust = 0.5)) +
+  theme(axis.title.x=element_blank()) +
+  theme(legend.position="none")
 
-ggplot(rain, aes(value)) + 
-  geom_histogram(binwidth=0.01)
+ggplot(rain, aes(Total)) + 
+  geom_histogram(binwidth=0.01) +
+  labs(title = "Precip Bin Distribution",
+       x = "Count", y="Total",
+       subtitle = "Pittsburgh (0.01 in. for each bin)" ,
+       caption = "Data Source: NCEI (formerly NCDC)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(plot.subtitle = element_text(hjust = 0.5))
 
 ggplot(TAVG, aes(x=date, y=value)) +
   geom_point(aes(color=value)) +
   scale_colour_gradient() + 
   geom_smooth(color="red", size=1) +
-  ggtitle ("Daily average temperature") +
-  xlab("Date") +  ylab ("Average Temperature ( ºF )")
+  labs(title = "2016 Daily Average Temperature",
+       y=expression(paste("Temperature ( ",degree ~ F," )")),
+       subtitle = "Pittsburgh",
+       caption = "Data Source: NCEI (formerly NCDC)") + 
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(plot.subtitle = element_text(hjust = 0.5)) +
+  theme(axis.title.x=element_blank()) +
+  theme(legend.position="none")
