@@ -83,7 +83,7 @@ for (i in 1:4){
     labs(title = Locations[LocationsRow[i],4],
          x="Local Time (0 is 12:00am)", 
          y=expression(paste("Temperature ( ",degree ~ F," )")),
-         caption = "(Sources: Weather Underground and NCEI (formerly NCDC))") + 
+         caption = "Source: Weather Underground and NCEI (formerly NCDC)") + 
     facet_wrap(~day,ncol = 4, scales = "free_x") + 
     theme_bw(base_size = 15) +
     theme(plot.title = element_text(hjust = 0.5)) +

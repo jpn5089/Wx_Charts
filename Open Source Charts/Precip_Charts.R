@@ -91,7 +91,7 @@ for (i in 1:2){
     scale_x_continuous(breaks = c(seq(0,23,by=3))) +
     labs(title = Locations[LocationsRow[i],3], x = "Local Time (0 is 12:00am)", 
          y = "Rainfall (inches)",
-         caption = "(Source: Weather Underground)") +
+         caption = "Source: Weather Underground") +
     theme_bw(base_size = 15) +
     theme(plot.title = element_text(hjust = 0.5)) +
     theme(plot.title = element_text(vjust = 2)) +

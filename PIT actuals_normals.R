@@ -1,3 +1,7 @@
+#https://cran.r-project.org/web/packages/rnoaa/README.html
+#https://ropensci.org/tutorials/rnoaa_tutorial.html
+#ftp://ftp.ncdc.noaa.gov/pub/data/normals/1981-2010/readme.txt
+
 library(rnoaa)
 library(ggplot2)
 library(dplyr)
@@ -48,6 +52,8 @@ normals <- read.csv("C:/Users/John/Desktop/R/Pitt_norms.csv") %>%
 
 #clean <- bind_rows(normals_max, normals_min)
 
+#http://stackoverflow.com/questions/19643234/fill-region-between-two-loess-smoothed-lines-in-r-with-ggplot
+
 ggplot(normals) +
   geom_ribbon(aes(x = normals$date, ymin = min, ymax = max), fill = "blue", alpha = 0.3)
 
@@ -61,3 +67,36 @@ g <- data.frame(a,b,c)
 
 ggplot(g) +
   geom_ribbon(aes(x = a, ymin = c, ymax = b), fill = "blue")
+
+
+#################################################################################################
+#################################################################################################
+
+#Precip
+
+
+
+out <- ncdc(datasetid='NORMAL_DLY', stationid='GHCND:USW00094823', datatypeid='YTD-PRCP-NORMAL', startdate = '2010-01-01', enddate = '2010-12-31', limit = 400)
+prcp <- out$data %>%
+  mutate(date = ymd_hms(gsub("T"," ",date))) %>%
+  mutate(value = (value/100)) %>%
+  mutate(dayofyear = format(date, format="%m-%d")) %>%
+  mutate(year = "Normal") %>%
+  select(date, datatype, station, value, year, dayofyear)
+
+precip_act <- filter(all_weather, station == "KPIT", datatype == "PRCP", year == 2015) %>%
+  mutate(dayofyear = format(date, format="%m-%d")) %>%
+  mutate(value = cumsum(value)) %>%
+  select(date, datatype, station, value, year, dayofyear)
+
+great <- rbind(precip_act, prcp) %>%
+  mutate(dayofyear = as.Date(dayofyear, "%m-%d"))
+
+ggplot(great, aes(x= dayofyear, y = value, col = year, group = year,
+                  linetype = year, size = year)) +
+  geom_line() +
+  scale_color_manual(values=c( "blue","red")) +
+  scale_linetype_manual(values=c("solid","solid")) +
+  scale_size_manual(values=c(1.25,1.75)) +
+  #scale_x_date(date_breaks = "1 month", date_minor_breaks = "1 week", date_labels = "%B") 
+  scale_x_date(date_breaks = "1 month", date_labels = "%B")

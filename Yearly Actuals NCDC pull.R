@@ -2,6 +2,17 @@
 #https://ropensci.org/tutorials/rnoaa_tutorial.html
 #https://www1.ncdc.noaa.gov/pub/data/cdo/documentation/GHCND_documentation.pdf
 
+#PRCP = Precipitation (mm or inches as per user preference, inches to hundredths on Daily Form pdf file) 
+#SNOW = Snowfall (mm or inches as per user preference, inches to tenths on Daily Form pdf file) 
+#SNWD = Snow depth (mm or inches as per user preference, inches on Daily Form pdf file) 
+#TMAX = Maximum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on Daily Form pdf file 
+#TMIN = Minimum temperature (Fahrenheit or Celsius as per user preference, Fahrenheit to tenths on Daily Form pdf file 
+#AWND = Average daily wind speed (meters per second or miles per hour as per user preference) 
+#WDF2 = Direction of fastest 2-minute wind (degrees) 
+#WDF5 = Direction of fastest 5-second wind (degrees) 
+#WSF2 = Fastest 2-minute wind speed (miles per hour or  meters per second as per user preference) 
+#WSF5 = Fastest 5-second wind speed (miles per hour or  meters per second as per user preference) 
+
 library(dplyr)
 library(lubridate)
 library(rnoaa)
@@ -9,12 +20,12 @@ library(ggplot2)
 
 options(noaakey = Sys.getenv("NOAAKEY"))
 
-Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
+station_info <- read.csv(file = "C:\\Users\\John\\Documents\\GitHub\\Wx_Charts\\Data\\isd-history.csv")
 
+Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
 StationsRow <- c(14,17)
 
 cityData_list <- list()
-
 yearly_list <- list()
 
 years <- seq(2015,2016, by=1)
@@ -28,6 +39,13 @@ for (i in 1:2){
   jan_weather <- ncdc(datasetid='GHCND', stationid = as.character(Stations[StationsRow[i],2]), 
                       startdate = paste("",j,"-01-01",sep = ""), enddate = paste("",j,"-02-01",sep = ""), limit = 1000)
   
+  #in degrees F
+  #H(fl_m) = represents highest or lowest hourly temperature (TMAX or TMIN) or average of hourly values (TAVG) 
+  #W(fl_so) = WBAN/ASOS Summary of the Day from NCDC's Integrated Surface Data (ISD)
+  #S(fl_so) = Global Summary of the Day (NCDC DSI-9618) NOTE: "S" values are derived from hourly synoptic reports
+  #exchanged on the Global Telecommunications System (GTS). Daily values derived in this fashion may differ
+  #significantly from "true" daily data, particularly for precipitation(i.e., use with caution)
+
   temps_jan <- jan_weather$data %>%
     mutate(date = ymd_hms(gsub("T"," ",date))) %>%
     mutate(station = as.character(Stations[StationsRow[i],1])) %>%
@@ -513,6 +531,15 @@ all_weather <- do.call(rbind,cityData_list) %>%
 
 proc.time() - ptm
 
+#####################################################################################
+###                                   PLOTTING                                    ###  
+###                                                                               ###
+###  http://theanalyticalminds.blogspot.pt/2015/02/part-2-data-preparation.html   ###
+###  https://rpubs.com/cfarmer/124829                                             ###
+###                                                                               ###          
+#####################################################################################
+
+
 rain <- filter(all_weather, datatype == "PRCP") %>%
   mutate(year = year(date)) %>%
   filter(year == 2016)
@@ -526,6 +553,28 @@ ggplot(rain, aes(date, Total)) +
   labs(title = "2016 Daily Precipitation",
        y="Rain (in)",
        subtitle = "Tampa",
+       caption = "Data Source: NCEI (formerly NCDC)") + 
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(plot.subtitle = element_text(hjust = 0.5)) +
+  theme(axis.title.x=element_blank()) +
+  theme(legend.position="none")
+
+ggplot(rain, aes(Total)) + 
+  geom_histogram(binwidth=0.01) +
+  labs(title = "Precip Bin Distribution",
+       x = "Count", y="Total",
+       subtitle = "Pittsburgh (0.01 in. for each bin)" ,
+       caption = "Data Source: NCEI (formerly NCDC)") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(plot.subtitle = element_text(hjust = 0.5))
+
+ggplot(TAVG, aes(x=date, y=value)) +
+  geom_point(aes(color=value)) +
+  scale_colour_gradient() + 
+  geom_smooth(color="red", size=1) +
+  labs(title = "2016 Daily Average Temperature",
+       y=expression(paste("Temperature ( ",degree ~ F," )")),
+       subtitle = "Pittsburgh",
        caption = "Data Source: NCEI (formerly NCDC)") + 
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(plot.subtitle = element_text(hjust = 0.5)) +
