@@ -23,16 +23,16 @@ options(noaakey = Sys.getenv("NOAAKEY"))
 station_info <- read.csv(file = "C:\\Users\\John\\Documents\\GitHub\\Wx_Charts\\Data\\isd-history.csv")
 
 Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames.csv",stringsAsFactors = FALSE)
-StationsRow <- c(14,17)
+StationsRow <- c(14)
 
 cityData_list <- list()
 yearly_list <- list()
 
-years <- seq(2015,2016, by=1)
+years <- seq(2010,2016, by=1)
 
 ptm <- proc.time()
 
-for (i in 1:2){
+for (i in 1:1){
   
   for (j in years) {
   
@@ -528,6 +528,8 @@ for (i in 1:2){
 all_weather <- do.call(rbind,cityData_list) %>%
   mutate(month = month(date)) %>%
   mutate(year  = year(date))
+
+#write.csv(all_weather, file = "C:/Users/John/Desktop/R/PIT_actuals_06_16.csv")
 
 proc.time() - ptm
 

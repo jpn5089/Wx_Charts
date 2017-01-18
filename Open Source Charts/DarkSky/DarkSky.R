@@ -7,6 +7,8 @@
 
 #http://forecastwatch.com/static/Three_Region_Overview_2010_201606.pdf
 
+#https://github.com/rudeboybert/fivethirtyeight
+
 library(darksky)
 library(purrr)
 library(httr)
