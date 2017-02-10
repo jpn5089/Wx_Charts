@@ -1,35 +1,36 @@
-short,noaa,City,titles,timezone,hour multiplier,name,latitude,longitude
-KABE,GHCND:USW00014737,Allentown,Normal vs Current and Previous Forecast - Allentown,America/New_York,,,,
-KAOO,GHCND:USW00014736,,,,,,,
-KAVP,GHCND:USW00014777,,,,,,,
-KBGM,GHCND:USW00004725,,,,,,,
-KCAK,GHCND:USW00014895,Akron,Normal vs Current and Previous Forecast - Akron/Alliance,,,,,
-KCLE,GHCND:USW00014820,Cleveland,Normal vs Current and Previous Forecast - Cleveland,,,,,
-KCMH,GHCND:USW00014821,Columbus,Normal vs Current and Previous Forecast - Columbus,,,,,
-KCVG,GHCND:USW00093814,,,,,,,
-KDAY,GHCND:USW00093815,,,,,,,
-KERI,GHCND:USW00014860,,,,,,,
-KIPT,GHCND:USW00014778,,,,,,,
-KMDT,GHCND:USW00014711,,,,,,,
-KPHL,GHCND:USW00013739,Philadelphia,Normal vs Current and Previous Forecast - Philadelphia,,,,,
-KPIT,GHCND:USW00094823,Pittsburgh,Normal vs Current and Previous Forecast - Pittsburgh,America/New_York,5,"Pittsburgh, PA",40.485,-80.214
-KRDG,GHCND:USW00014712,,,,,,,
-KTOL,GHCND:USW00094830,Toledo,Normal vs Current and Previous Forecast - Toledo,,,,,
-KTPA,GHCND:USW00012842,Tampa,Normal vs Current and Previous Forecast - Tampa,America/New_York,5,,27.962,-82.54
-KPIE,GHCND:USW00012873,Clearwater,Normal vs Current and Previous Forecast - Clearwater/St. Pete,,,,27.9,-82.683
-KJAC,GHCND:USW00024156,Jackson Hole,Normal vs Current and Previous Forecast - Jackson Hole,America/Denver,7,,,
-KBHB,GHCND:USW00014764,Bar Harbor,Normal vs Current and Previous Forecast - Bar Harbor/Acadia NP,America/New_York,5,,,
-KLBB,GHCND:USW00023042,Lubbock,"Normal vs Current and Previous Forecast - Lubbock, TX",US/Central,6,,,
-KBOS,,"Boston, MA",,,,"Boston, MA",,
-KMEM,,"Memphis, TN",,,,"Memphis, TN",,
-KMSP,,"Minneapolis, MN",,,,"Minneapolis, MN",,
-KOKC,,"Oklahoma City, OK",,,,"Oklahoma City, OK",,
-KSLC,,"Salt Lake City, UT",,,,"Salt Lake City, UT",,
-KBUF,,"Buffalo, NY",,,,"Buffalo, NY",,
-KLIT,,"Little Rock, AR",,,,"Little Rock, AR",,
-KBOI,,"Boise, ID",,,,"Boise, ID",,
-KLGA,,"La Guardia Int't Airport (NYC, NY)",,,,"La Guardia Int't Airport (NYC, NY)",,
-KDSM,,"Des Moines, IA",,,,"Des Moines, IA",,
-KMCO,GHCND:USW00012815,Orlando,"Normal vs Current and Previous Forecast - Orlando, FL",America/New_York,,,28.434,-81.325
-KDAB,GHCND:USW00022010,Daytona Beach,"Normal vs Current and Previous Forecast - Daytona Beach, FL",America/New_York,,,29.183,-81.048
-KDRT,GHCND:USW00012835,Big Bend National Park,Normal vs Current and Previous Forecast - Big Bend National Park,US/Central,5,,,
+short,noaa,City,titles,timezone,hour multiplier,name,latitude,longitude,code
+KABE,GHCND:USW00014737,Allentown,Normal vs Current and Previous Forecast - Allentown,America/New_York,,,,,
+KAOO,GHCND:USW00014736,,,,,,,,
+KAVP,GHCND:USW00014777,,,,,,,,
+KBGM,GHCND:USW00004725,,,,,,,,
+KCAK,GHCND:USW00014895,Akron,Normal vs Current and Previous Forecast - Akron/Alliance,,,,,,
+KCLE,GHCND:USW00014820,Cleveland,Normal vs Current and Previous Forecast - Cleveland,,,,,,
+KCMH,GHCND:USW00014821,Columbus,Normal vs Current and Previous Forecast - Columbus,,,,,,
+KCVG,GHCND:USW00093814,,,,,,,,
+KDAY,GHCND:USW00093815,,,,,,,,
+KERI,GHCND:USW00014860,,,,,,,,
+KIPT,GHCND:USW00014778,,,,,,,,
+KMDT,GHCND:USW00014711,,,,,,,,
+KPHL,GHCND:USW00013739,Philadelphia,Normal vs Current and Previous Forecast - Philadelphia,,,,,,
+KPIT,GHCND:USW00094823,Pittsburgh,Normal vs Current and Previous Forecast - Pittsburgh,America/New_York,5,"Pittsburgh, PA",40.485,-80.214,airport_code
+KRDG,GHCND:USW00014712,,,,,,,,
+KTOL,GHCND:USW00094830,Toledo,Normal vs Current and Previous Forecast - Toledo,,,,,,
+KTPA,GHCND:USW00012842,Tampa,Normal vs Current and Previous Forecast - Tampa,America/New_York,5,,27.962,-82.54,airport_code
+KPIE,GHCND:USW00012873,Clearwater,Normal vs Current and Previous Forecast - Clearwater/St. Pete,,,,27.9,-82.683,airport_code
+KJAC,GHCND:USW00024156,Jackson Hole,Normal vs Current and Previous Forecast - Jackson Hole,America/Denver,7,,,,airport_code
+KBHB,GHCND:USW00014764,Bar Harbor,Normal vs Current and Previous Forecast - Bar Harbor/Acadia NP,America/New_York,5,,,,airport_code
+KLBB,GHCND:USW00023042,Lubbock,"Normal vs Current and Previous Forecast - Lubbock, TX",US/Central,6,,,,airport_code
+KBOS,,"Boston, MA",,,,"Boston, MA",,,
+KMEM,,"Memphis, TN",,,,"Memphis, TN",,,
+KMSP,,"Minneapolis, MN",,,,"Minneapolis, MN",,,
+KOKC,,"Oklahoma City, OK",,,,"Oklahoma City, OK",,,
+KSLC,,"Salt Lake City, UT",,,,"Salt Lake City, UT",,,
+KBUF,,"Buffalo, NY",,,,"Buffalo, NY",,,
+KLIT,,"Little Rock, AR",,,,"Little Rock, AR",,,
+KBOI,,"Boise, ID",,,,"Boise, ID",,,
+KLGA,,"La Guardia Int't Airport (NYC, NY)",,,,"La Guardia Int't Airport (NYC, NY)",,,
+KDSM,,"Des Moines, IA",,,,"Des Moines, IA",,,
+KMCO,GHCND:USW00012815,Orlando,"Normal vs Current and Previous Forecast - Orlando, FL",America/New_York,,,28.434,-81.325,airport_code
+KDAB,GHCND:USW00022010,Daytona Beach,"Normal vs Current and Previous Forecast - Daytona Beach, FL",America/New_York,,,29.183,-81.048,airport_code
+KDRT,GHCND:USW00012835,Big Bend National Park,Normal vs Current and Previous Forecast - Big Bend National Park,US/Central,5,,,,airport_code
+KPAPITTS201,,Nicola House,Normal vs Current and Previous Forecast - Nicola House,America/New_York,,,,,PWS_id
