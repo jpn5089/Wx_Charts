@@ -28,7 +28,7 @@ StationsRow <- c(14)
 cityData_list <- list()
 yearly_list <- list()
 
-years <- seq(2010,2016, by=1)
+years <- seq(2015,2016, by=1)
 
 ptm <- proc.time()
 
