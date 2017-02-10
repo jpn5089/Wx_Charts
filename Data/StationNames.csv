@@ -19,7 +19,7 @@ KTPA,GHCND:USW00012842,Tampa,Normal vs Current and Previous Forecast - Tampa,Ame
 KPIE,GHCND:USW00012873,Clearwater,Normal vs Current and Previous Forecast - Clearwater/St. Pete,,,,27.9,-82.683
 KJAC,GHCND:USW00024156,Jackson Hole,Normal vs Current and Previous Forecast - Jackson Hole,America/Denver,7,,,
 KBHB,GHCND:USW00014764,Bar Harbor,Normal vs Current and Previous Forecast - Bar Harbor/Acadia NP,America/New_York,5,,,
-KLBB,GHCND:USW00023042,Lubbock,"Normal vs Current and Previous Forecast - Lubbock, TX",CST6CDT,6,,,
+KLBB,GHCND:USW00023042,Lubbock,"Normal vs Current and Previous Forecast - Lubbock, TX",US/Central,6,,,
 KBOS,,"Boston, MA",,,,"Boston, MA",,
 KMEM,,"Memphis, TN",,,,"Memphis, TN",,
 KMSP,,"Minneapolis, MN",,,,"Minneapolis, MN",,
@@ -32,4 +32,4 @@ KLGA,,"La Guardia Int't Airport (NYC, NY)",,,,"La Guardia Int't Airport (NYC, NY
 KDSM,,"Des Moines, IA",,,,"Des Moines, IA",,
 KMCO,GHCND:USW00012815,Orlando,"Normal vs Current and Previous Forecast - Orlando, FL",America/New_York,,,28.434,-81.325
 KDAB,GHCND:USW00022010,Daytona Beach,"Normal vs Current and Previous Forecast - Daytona Beach, FL",America/New_York,,,29.183,-81.048
-KDRT,GHCND:USW00012835,Big Bend National Park,Normal vs Current and Previous Forecast - Big Bend National Park,America/New_York,5,,,
+KDRT,GHCND:USW00012835,Big Bend National Park,Normal vs Current and Previous Forecast - Big Bend National Park,US/Central,5,,,
