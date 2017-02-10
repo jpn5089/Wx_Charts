@@ -12,7 +12,7 @@ KERI,GHCND:USW00014860,,,,,,,,
 KIPT,GHCND:USW00014778,,,,,,,,
 KMDT,GHCND:USW00014711,,,,,,,,
 KPHL,GHCND:USW00013739,Philadelphia,Normal vs Current and Previous Forecast - Philadelphia,,,,,,
-KPIT,GHCND:USW00094823,Pittsburgh,Normal vs Current and Previous Forecast - Pittsburgh,America/New_York,5,"Pittsburgh, PA",40.485,-80.214,airport_code
+KPIT,GHCND:USW00094823,Pittsburgh,Normal vs Current and Previous Forecast - Pittsburgh,America/New_York,5,"Pittsburgh, PA",40.49,-80.23,airport_code
 KRDG,GHCND:USW00014712,,,,,,,,
 KTOL,GHCND:USW00094830,Toledo,Normal vs Current and Previous Forecast - Toledo,,,,,,
 KTPA,GHCND:USW00012842,Tampa,Normal vs Current and Previous Forecast - Tampa,America/New_York,5,,27.962,-82.54,airport_code
@@ -32,5 +32,5 @@ KLGA,,"La Guardia Int't Airport (NYC, NY)",,,,"La Guardia Int't Airport (NYC, NY
 KDSM,,"Des Moines, IA",,,,"Des Moines, IA",,,
 KMCO,GHCND:USW00012815,Orlando,"Normal vs Current and Previous Forecast - Orlando, FL",America/New_York,,,28.434,-81.325,airport_code
 KDAB,GHCND:USW00022010,Daytona Beach,"Normal vs Current and Previous Forecast - Daytona Beach, FL",America/New_York,,,29.183,-81.048,airport_code
-KDRT,GHCND:USW00012835,Big Bend National Park,Normal vs Current and Previous Forecast - Big Bend National Park,US/Central,5,,,,airport_code
-KPAPITTS201,,Nicola House,Normal vs Current and Previous Forecast - Nicola House,America/New_York,,,,,PWS_id
+KDRT,GHCND:USW00012835,Big Bend National Park,Normal vs Current and Previous Forecast - Big Bend National Park,US/Central,5,,29.37,-100.92,airport_code
+KPAPITTS201,,Nicola House,Normal vs Current and Previous Forecast - Nicola House,America/New_York,,,40.34648,-79.97987,PWS_id
