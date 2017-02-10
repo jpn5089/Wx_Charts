@@ -13,10 +13,10 @@ library(tibble)
 rwunderground::set_api_key(Sys.getenv("GET_API_KEY"))
 
 Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
-LocationsRow <- c(17,14)
+LocationsRow <- c(17,14,32)
 cities <- list()
 
-for (i in 1:2){
+for (i in 1:3){
   precip <- hourly10day(set_location(airport_code = as.character(Locations[LocationsRow[i],1]))) %>%
     select(date, rain, pop) %>%
     mutate(date = ymd_hms(date)) %>%
@@ -60,9 +60,9 @@ FcstPrecip <- forecasts_precip %>%
   mutate(date = ymd_hms(date)) %>%
   mutate(day = floor_date(date,unit = "day")) %>%
   filter(floor_date(date,unit ="day") <= ymd(today())+days(5) & floor_date(date,unit ="day") >= ymd(today())+days(1)) %>%
-  filter(station %in% c("KPIT","KTPA")) 
+  filter(station %in% c("KPIT","KTPA","KMCO")) 
 
-for (i in 1:2){
+for (i in 1:3){
   plot1 <- ggplot(filter(FcstPrecip, station == Locations$short[LocationsRow[i]]),
                   aes(x = hour, y = pop, col = datatype, group = datatype,
                       linetype = datatype, size = datatype, alpha = datatype)) +
@@ -90,7 +90,7 @@ for (i in 1:2){
     facet_wrap(~day,ncol = 5, scales = "free_x") +
     scale_x_continuous(breaks = c(seq(0,23,by=3))) +
     labs(title = Locations[LocationsRow[i],3], x = "Local Time (0 is 12:00am)", 
-         y = "Rainfall (inches)",
+         y = "Total Rainfall (inches)",
          caption = "Source: Weather Underground") +
     theme_bw(base_size = 15) +
     theme(plot.title = element_text(hjust = 0.5)) +

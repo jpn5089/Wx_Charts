@@ -13,11 +13,11 @@ Stations <- read.csv("c:/users/John/Documents/GitHub/Wx_Charts/Data/StationNames
 #hours <- seq(0,23)
 #temps <- c("ATSI_temp","DUQ_temp","PPL_temp","PECO_temp","AEP_temp","Toledo_temp","Akron_temp")
 
-StationsRow <- c(32,33)
+StationsRow <- c(34)
 
 allData <- list()
 
-for (i in 1:2){
+for (i in 1:1){
   
   jan_normals <- ncdc(datasetid='NORMAL_HLY', stationid = as.character(Stations[StationsRow[i],2]), 
                       datatypeid = "HLY-TEMP-NORMAL", startdate = '2010-01-01', enddate = '2010-02-01', limit = 1000)

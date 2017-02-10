@@ -31,4 +31,5 @@ KBOI,,"Boise, ID",,,,"Boise, ID",,
 KLGA,,"La Guardia Int't Airport (NYC, NY)",,,,"La Guardia Int't Airport (NYC, NY)",,
 KDSM,,"Des Moines, IA",,,,"Des Moines, IA",,
 KMCO,GHCND:USW00012815,Orlando,"Normal vs Current and Previous Forecast - Orlando, FL",America/New_York,,,28.434,-81.325
-KDAB,GHCND:USW00012834,Daytona Beach,"Normal vs Current and Previous Forecast - Daytona Beach, FL",America/New_York,,,29.183,-81.048
+KDAB,GHCND:USW00022010,Daytona Beach,Normal vs Current and Previous Forecast - Big Bend National Park,America/New_York,,,29.183,-81.048
+KDRT,GHCND:USW00012835,Big Bend,"Normal vs Current and Previous Forecast - Daytona Beach, FL",CST6CDT,6,,,
