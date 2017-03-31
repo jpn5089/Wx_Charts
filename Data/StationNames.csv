@@ -16,7 +16,7 @@ KPIT,GHCND:USW00094823,Pittsburgh,Normal vs Current and Previous Forecast - Pitt
 KRDG,GHCND:USW00014712,,,,,,,,
 KTOL,GHCND:USW00094830,Toledo,Normal vs Current and Previous Forecast - Toledo,,,,,,
 KTPA,GHCND:USW00012842,Tampa,Normal vs Current and Previous Forecast - Tampa,America/New_York,5,,27.962,-82.54,airport_code
-KPIE,GHCND:USW00012873,Clearwater,Normal vs Current and Previous Forecast - Clearwater/St. Pete,,,,27.9,-82.683,airport_code
+KPIE,GHCND:USW00012873,Clearwater,Normal vs Current and Previous Forecast - Clearwater/St. Pete,,5,,27.9,-82.683,airport_code
 KJAC,GHCND:USW00024156,Jackson Hole,Normal vs Current and Previous Forecast - Jackson Hole,America/Denver,7,,,,airport_code
 KBHB,GHCND:USW00014764,Bar Harbor,Normal vs Current and Previous Forecast - Bar Harbor/Acadia NP,America/New_York,5,,,,airport_code
 KLBB,GHCND:USW00023042,Lubbock,"Normal vs Current and Previous Forecast - Lubbock, TX",US/Central,6,,,,airport_code
@@ -33,4 +33,4 @@ KDSM,,"Des Moines, IA",,,,"Des Moines, IA",,,
 KMCO,GHCND:USW00012815,Orlando,"Normal vs Current and Previous Forecast - Orlando, FL",America/New_York,,,28.434,-81.325,airport_code
 KDAB,GHCND:USW00022010,Daytona Beach,"Normal vs Current and Previous Forecast - Daytona Beach, FL",America/New_York,,,29.183,-81.048,airport_code
 KDRT,GHCND:USW00012835,Big Bend National Park,Normal vs Current and Previous Forecast - Big Bend National Park,US/Central,5,,29.37,-100.92,airport_code
-KPAPITTS201,,Nicola House,Normal vs Current and Previous Forecast - Nicola House,America/New_York,,,40.34648,-79.97987,PWS_id
+KPAPITTS201,,Nicola House,Normal vs Current and Previous Forecast - Nicola House,America/New_York,5,,40.34648,-79.97987,PWS_id
