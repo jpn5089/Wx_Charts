@@ -1,4 +1,6 @@
-#devtools::install_github("ALShum/rwunderground")
+#https://github.com/ALShum/rwunderground
+#https://cran.r-project.org/web/packages/rwunderground/rwunderground.pdf
+
 library(rwunderground)
 library(ggplot2)
 library(dplyr)
@@ -13,13 +15,14 @@ library(tibble)
 rwunderground::set_api_key(Sys.getenv("GET_API_KEY"))
 
 Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
-LocationsRow <- c(17,14,32, 33)
+LocationsRow <- c(17,14,32,34,35)
 cities <- list()
 
-for (i in 1:4){
-  temp_wx <- hourly10day(set_location(airport_code = as.character(Locations[LocationsRow[i],1]))) %>%
+for (i in 1:5){
+  temp_wx <- hourly10day(set_location(lat_long = paste(as.character(Locations[LocationsRow[i],8]),",",as.character(Locations[LocationsRow[i],9]),sep = ""))) %>%
     select(date,value = temp) %>%
-    mutate(date = ymd_hms(date)) %>%
+    mutate(date = ymd_hms(date) - hours(Locations[LocationsRow[i],6])) %>%
+    #mutate(date = as.POSIXct(date, tz = "EDT")) %>%
     mutate(day = floor_date(date,unit = "day"),
            hour = hour(date)) %>%
            #day2 = day(date),
@@ -69,9 +72,9 @@ fcst_norm <- rbind(all_normals,forecasts) %>%
   mutate(date = ymd_hms(date)) %>%
   mutate(day = floor_date(date,unit = "day")) %>%
   filter(floor_date(date,unit ="day") <= ymd(today())+days(8) & floor_date(date,unit ="day") >= ymd(today())+days(1)) %>%
-  filter(station %in% c("KTPA", "KPIT", "KMCO", "KDAB")) 
+  filter(station %in% c("KTPA", "KPIT", "KMCO", "KDRT","KPAPITTS201")) 
 
-for (i in 1:4){
+for (i in 1:5){
   plots <- ggplot(filter(fcst_norm, station == Locations$short[LocationsRow[i]]), 
                   aes(x=hour, y=value, col = datatype, group = datatype,
                       linetype = datatype, size = datatype, alpha = datatype)) +
