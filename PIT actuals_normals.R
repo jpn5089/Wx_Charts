@@ -55,7 +55,12 @@ normals <- read.csv("C:/Users/John/Desktop/R/Pitt_norms.csv") %>%
 
 #clean <- bind_rows(normals_max, normals_min)
 
+##############################################################################################################
 #http://stackoverflow.com/questions/19643234/fill-region-between-two-loess-smoothed-lines-in-r-with-ggplot
+
+#Plot 1 standard deviation too. Get all values from 1981-2010 and average high temp devs from norm and same 
+#with low temps 
+##############################################################################################################
 
 ggplot(normals) +
   geom_ribbon(aes(x = normals$date, ymin = min, ymax = max), fill = "blue", alpha = 0.15)
@@ -77,11 +82,20 @@ ggplot(g) +
 
 #Precip
 
-out <- ncdc(datasetid='NORMAL_DLY', stationid='GHCND:USW00094823', datatypeid='YTD-PRCP-NORMAL', startdate = '2010-01-01', enddate = '2010-12-31', limit = 400)
-obsvred <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823", datatypeid = "PRCP",
-            startdate = "2017-01-01", enddate = "2017-02-05", limit = 1000)
+precip_act <- read.csv(file = "C:\\Users\\John\\Desktop\\R\\PIT_act_06_16.csv")
 
-obs_rain <- obsvred$data %>%
+#precip_act <- subset(precip_act, year != 2006 && month < 10)
+
+#out <- ncdc(datasetid='NORMAL_DLY', stationid='GHCND:USW00094823', datatypeid='YTD-PRCP-NORMAL', startdate = '2010-01-01', enddate = '2010-12-31', limit = 400)
+
+rain_norm <- read.csv(file = "C:\\Users\\John\\Desktop\\R\\rain_norm.csv") %>%
+  select(-X) %>%
+  mutate(date = mdy(date))
+
+obsvred <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823", datatypeid = "PRCP",
+            startdate = "2017-01-01", enddate = "2017-03-28", limit = 1000)
+
+rain_2017 <- obsvred$data %>%
   mutate(date = ymd_hms(gsub("T"," ",date))) %>%
   mutate(date = as.Date(date)) %>%
   mutate(value = round(((value/10)*0.03937008),2)) %>%
@@ -89,36 +103,34 @@ obs_rain <- obsvred$data %>%
   #mutate(value = cumsum(value)) %>%
   mutate(year = year(date)) %>%
   select(date, datatype, station, value, year, dayofyear)
-  
-prcp <- out$data %>%
-  mutate(date = ymd_hms(gsub("T"," ",date))- years(100)) %>%
-  mutate(date = as.Date(date)) %>%
-  mutate(value = (value/100)) %>%
-  mutate(dayofyear = format(date, format="%m-%d")) %>%
-  mutate(year = "Normal") %>%
-  select(date, datatype, station, value, year, dayofyear)
 
-all_weather <- filter(precip_act, station == "KPIT", datatype == "PRCP") %>%
+rain_pre2017 <- filter(precip_act, station == "KPIT", datatype == "PRCP") %>%
   mutate(date = mdy(date)) %>%
   mutate(dayofyear = format(date, format="%m-%d")) %>%
   #mutate(value = cumsum(value)) %>%
   select(date, datatype, station, value, year, dayofyear)
 
-ttl <- data.table(precip_act)
-ttl[, value := cumsum(value), by=list(year)] 
-
-great <- rbind(prcp, total) %>%
-  mutate(dayofyear = as.Date(dayofyear, "%m-%d")) %>%
-  filter(dayofyear <= as.Date("2017-02-28")) 
-
-write.csv(great, file = "C:\\Users\\John\\Desktop\\rain.csv")
 rain <- read.csv(file = "C:\\Users\\John\\Desktop\\R\\PIT_06_17.csv") %>%
   select(-X) %>%
   mutate(date = mdy(date)) %>%
   mutate(CDate = mdy(CDate)) %>%
   mutate(CDate = as.Date(CDate))
+  #filter(CDate >= "1900-10-01" & CDate <= "1901-03-28")
   #mutate(dayofyear = mdy(dayofyear)) %>%
   #mutate(dayofyear = as.Date(dayofyear))
+
+#################################################################
+#Below is for caledar year
+#################################################################
+
+#ttl <- data.table(precip_act)
+#ttl[, value := cumsum(value), by=list(year)] 
+
+great <- rbind(rain_norm, ttl) %>%
+  mutate(dayofyear = as.Date(dayofyear, "%m-%d")) %>%
+  filter(dayofyear <= as.Date("2017-02-28")) 
+
+#write.csv(great, file = "C:\\Users\\John\\Desktop\\R\\rain.csv")
 
 ggplot(great, aes(x= dayofyear, y = value, col = year, group = year,
                   linetype = year, size = year)) +
@@ -144,27 +156,34 @@ ggsave(filename = "C:\\Users\\John\\Desktop\\ObsPrecip.jpeg", width = 10, height
 # SNOW 
 #####################################################################################################
 
-snow <- filter(precip_act, datatype == "SNOW") %>%
+snow_pre17 <- filter(precip_act, datatype == "SNOW") %>%
   mutate(date = mdy(date)) %>%
   mutate(dayofyear = format(date, format="%m-%d")) %>%
   #mutate(value = cumsum(value)) %>%
-  select(date, datatype, station, value, year, dayofyear) 
+  select(date, datatype, station, value, year, dayofyear)
 
-#total_snow <- data.table(snow)
-#total_snow[, value := cumsum(value), by=list(year)]
-
-sn <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823", datatypeid = "SNOW",
-                startdate = "2017-01-01", enddate = "2017-01-31", limit = 1000)
-
-snw <- read.csv(file = "C:\\Users\\John\\Desktop\\R\\snow_norm.csv") %>%
+sn_norm <- read.csv(file = "C:\\Users\\John\\Desktop\\R\\snow_norm.csv") %>%
   mutate(date = mdy(date)) 
 
-hellosnow <- sn$data %>%
+sn <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823", datatypeid = "SNOW",
+                startdate = "2017-01-01", enddate = "2017-03-28", limit = 1000)
+
+snow_17 <- sn$data %>%
   mutate(date = ymd_hms(gsub("T"," ",date))) %>%
   mutate(value = round(((value)*0.03937008),1)) %>%
   mutate(dayofyear = format(date, format="%m-%d")) %>%
   mutate(year = year(date)) %>%
   select(date, datatype, station, value, year, dayofyear)
+
+#write.csv(snow_17,file = "C:\\Users\\John\\Desktop\\R\\snowfix.csv" )
+#snow_17 <- read.csv(file = "C:\\Users\\John\\Desktop\\R\\snowfix.csv") %>%
+#  select(-X) %>%
+#  mutate(date = mdy(date))
+
+# Below is for Calendar Year
+
+#total_snow <- data.table(snow)
+#total_snow[, value := cumsum(value), by=list(year)]
 
 great_snow <- rbind(total_snow, hellosnow) %>%
   mutate(dayofyear = as.Date(dayofyear, "%m-%d")) %>%
