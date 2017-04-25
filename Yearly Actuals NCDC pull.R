@@ -28,14 +28,14 @@ StationsRow <- c(14)
 cityData_list <- list()
 yearly_list <- list()
 
-years <- seq(2015,2016, by=1)
+years <- seq(1981,2016, by=1)
 
 ptm <- proc.time()
 
 for (i in 1:1){
   
   for (j in years) {
-  
+  print(j)
   jan_weather <- ncdc(datasetid='GHCND', stationid = as.character(Stations[StationsRow[i],2]), 
                       startdate = paste("",j,"-01-01",sep = ""), enddate = paste("",j,"-02-01",sep = ""), limit = 1000)
   
@@ -167,6 +167,7 @@ for (i in 1:1){
     filter(datatype %in% c("SNWD")) %>%
     mutate(value = round((value*0.03937008),0))
   
+  print("march")
   march <- rbind(temps_mar, winds_mar, precip_mar, snowfall_mar, snow_depth_mar)
   
   ################################################################################################   
@@ -281,6 +282,7 @@ for (i in 1:1){
     filter(datatype %in% c("SNWD")) %>%
     mutate(value = round((value*0.03937008),0))
   
+  print("june")
   june <- rbind(temps_jun, winds_jun, precip_jun, snowfall_jun, snow_depth_jun)
   
   ################################################################################################   
@@ -395,6 +397,7 @@ for (i in 1:1){
     filter(datatype %in% c("SNWD")) %>%
     mutate(value = round((value*0.03937008),0))
   
+  print("sept")
   september <- rbind(temps_sept, winds_sept, precip_sept, snowfall_sept, snow_depth_sept)
   
   ################################################################################################   
@@ -527,9 +530,10 @@ for (i in 1:1){
 
 all_weather <- do.call(rbind,cityData_list) %>%
   mutate(month = month(date)) %>%
-  mutate(year  = year(date))
+  mutate(year  = year(date)) %>%
+  mutate(month_day = format(date, format="%m-%d"))
 
-#write.csv(all_weather, file = "C:/Users/John/Desktop/R/PIT_actuals_06_16.csv")
+#write.csv(all_weather, file = "C:/Users/John/Desktop/R/PIT_actuals_1981_2016.csv")
 
 proc.time() - ptm
 
@@ -548,9 +552,15 @@ rain <- filter(all_weather, datatype == "PRCP") %>%
 #rain <- filter(rain, station == "KTPA")
 colnames(rain)[4] <- "Total"
 
-ggplot(rain, aes(date, Total)) +
-  geom_point(aes(color=Total)) +
-  geom_smooth(color="blue", size=1) +
+qq <- lm(value ~ date, data = rain)
+qqst <- rstandard(qq)
+summary(qq)
+
+ggplot(rain, aes(date, value)) +
+  #geom_point(aes(color=Total)) +
+  #geom_smooth(color="blue", size=1) +
+  geom_line() +
+  geom_smooth(method=lm, se = FALSE) 
   scale_colour_gradient() +
   labs(title = "2016 Daily Precipitation",
        y="Rain (in)",
@@ -582,3 +592,31 @@ ggplot(TAVG, aes(x=date, y=value)) +
   theme(plot.subtitle = element_text(hjust = 0.5)) +
   theme(axis.title.x=element_blank()) +
   theme(legend.position="none")
+
+################################################################################################
+################################################################################################
+
+PIT_weather <- filter(all_weather, year == 2016) %>%
+  #filter(month_day == "01-01") %>%
+  filter(datatype  == "TAVG") %>%
+  select(month_day, datatype, value) 
+  #mutate(dif = (value -36)^2)
+
+plusMinus <- read.csv("C:/Users/John/Desktop/R/Pitt_TAVG.csv") %>%
+  select(month_day, datatype, value) %>%
+  mutate(month_day = mdy(month_day)) %>%
+  mutate(month_day = format(month_day, format="%m-%d"))
+
+
+full <- rbind(PIT_weather, plusMinus)
+
+ggplot(full, aes(x=month_day, y = value, col = datatype, group = datatype, linetype = datatype, size = datatype)) + 
+  geom_line() +
+  scale_color_manual(values=c("black", "black", "blue"))+
+  scale_linetype_manual(values=c("solid","solid", "solid"))+
+  scale_size_manual(values=c(1.25,1.25, 1.75)) +
+  labs(title = "2015 Daily Average Temperature vs Standard Deviations",
+       subtitle = "Pittsburgh")
+  
+
+  

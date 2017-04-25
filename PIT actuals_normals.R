@@ -55,6 +55,28 @@ normals <- read.csv("C:/Users/John/Desktop/R/Pitt_norms.csv") %>%
 
 #clean <- bind_rows(normals_max, normals_min)
 
+standard_dev <- ncdc(datasetid='NORMAL_DLY', stationid='GHCND:USW00094823', datatypeid = c("DLY-TAVG-STDDEV", "DLY-TMAX-STDDEV"),
+              startdate = '2010-01-01', enddate = '2010-12-31', limit = 1000)
+
+standard_devs <- ncdc(datasetid='NORMAL_DLY', stationid='GHCND:USW00094823', datatypeid = "DLY-TMIN-STDDEV",
+                     startdate = '2010-01-01', enddate = '2010-12-31', limit = 1000)
+
+stdev <- standard_dev$data
+std_d <- standard_devs$data
+
+st <- rbind(stdev, std_d)
+
+std_devs <- st %>%
+  mutate(date = ymd_hms(gsub("T"," ",date)) + years(7),
+         value = (value/10)) %>%
+  mutate(value = as.numeric(value))%>%
+  mutate(month = month(date)) %>%
+  mutate(month_day = format(date, format="%m-%d")) %>%
+  filter(datatype == "DLY-TAVG-STDDEV") %>%
+  select(month_day,datatype,value)
+
+#write.csv(std_devs, "C:/Users/John/Desktop/R/Pitt_StDev.csv" )
+
 ##############################################################################################################
 #http://stackoverflow.com/questions/19643234/fill-region-between-two-loess-smoothed-lines-in-r-with-ggplot
 
@@ -93,7 +115,7 @@ rain_norm <- read.csv(file = "C:\\Users\\John\\Desktop\\R\\rain_norm.csv") %>%
   mutate(date = mdy(date))
 
 obsvred <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823", datatypeid = "PRCP",
-            startdate = "2017-01-01", enddate = "2017-03-28", limit = 1000)
+            startdate = "2017-01-01", enddate = "2017-04-30", limit = 1000)
 
 rain_2017 <- obsvred$data %>%
   mutate(date = ymd_hms(gsub("T"," ",date))) %>%
@@ -166,7 +188,7 @@ sn_norm <- read.csv(file = "C:\\Users\\John\\Desktop\\R\\snow_norm.csv") %>%
   mutate(date = mdy(date)) 
 
 sn <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823", datatypeid = "SNOW",
-                startdate = "2017-01-01", enddate = "2017-03-28", limit = 1000)
+                startdate = "2017-01-01", enddate = "2017-04-28", limit = 1000)
 
 snow_17 <- sn$data %>%
   mutate(date = ymd_hms(gsub("T"," ",date))) %>%
