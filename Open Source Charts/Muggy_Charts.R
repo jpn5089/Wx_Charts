@@ -54,14 +54,14 @@ FcstMuggy <- FcstMuggy %>%
   mutate(day = floor_date(date,unit = "day"),
          hour = hour(date))
 
-slocation <- paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Muggy_Forecast_", Sys.Date(),".Rda",sep = "")
+slocation <- paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Muggy_Forecast_", Sys.Date(),".rds",sep = "")
 
 saveRDS(FcstMuggy, file = slocation)
 
 today_muggy <- readRDS(slocation) %>%
   mutate(datatype = "Today's Forecast")
 
-yesterday_muggy <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Muggy_Forecast_", Sys.Date()-1,".Rda", sep = "")) %>%
+yesterday_muggy <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Muggy_Forecast_", Sys.Date()-1,".rds", sep = "")) %>%
   mutate(datatype = "Yesterday's Forecast")
 
 forecasts_muggy <- rbind(today_muggy, yesterday_muggy) %>%

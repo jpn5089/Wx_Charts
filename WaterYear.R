@@ -25,7 +25,7 @@ total_obs_rain <- data.table(obs_water_yr)
 total_obs_rain[, value := cumsum(value), by=list(wtr_yrVAR)] 
 
 final <- rbind(normal_water_yr, total_obs_rain) %>% 
-  filter(CDate >= "1900-10-01" & CDate <= "1901-04-30") 
+  filter(CDate >= "1900-10-01" & CDate <= "1901-05-31") 
 
 #write.csv(final, file = "C:\\Users\\John\\Desktop\\R\\PIT_06_17.csv")
 
@@ -72,7 +72,7 @@ total_obs_snow <- data.table(obs_snow_yr)
 total_obs_snow[, value := cumsum(value), by=list(wtr_yrVAR)]   
 
 final_sn <- rbind(normal_snow_yr, total_obs_snow) %>% 
-  filter(CDate >= "1900-10-01" & CDate <= "1901-04-30") 
+  filter(CDate >= "1900-10-01" & CDate <= "1901-05-31") 
 
 ###################################################################################################
 #Plot

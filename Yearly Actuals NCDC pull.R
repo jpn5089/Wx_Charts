@@ -1,6 +1,7 @@
 #https://cran.r-project.org/web/packages/rnoaa/README.html
 #https://ropensci.org/tutorials/rnoaa_tutorial.html
 #https://www1.ncdc.noaa.gov/pub/data/cdo/documentation/GHCND_documentation.pdf
+#https://cran.rstudio.com/web/packages/rnoaa/news.html
 
 #PRCP = Precipitation (mm or inches as per user preference, inches to hundredths on Daily Form pdf file) 
 #SNOW = Snowfall (mm or inches as per user preference, inches to tenths on Daily Form pdf file) 

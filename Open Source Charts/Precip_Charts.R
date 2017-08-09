@@ -42,14 +42,14 @@ FcstPrecip <- FcstPrecip %>%
   mutate(day = floor_date(date,unit = "day"),
          hour = hour(date))
 
-slocation <- paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Precip_Forecast_", Sys.Date(),".Rda",sep = "")
+slocation <- paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Precip_Forecast_", Sys.Date(),".rds",sep = "")
 
 saveRDS(FcstPrecip, file = slocation)
 
 today_precip <- readRDS(slocation) %>%
   mutate(datatype = "Today's Forecast")
 
-yesterday_precip <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Precip_Forecast_", Sys.Date()-1,".Rda", sep = "")) %>%
+yesterday_precip <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Precip_Forecast_", Sys.Date()-1,".rds", sep = "")) %>%
   mutate(datatype = "Yesterday's Forecast")
 
 forecasts_precip <- rbind(today_precip, yesterday_precip) %>%

@@ -115,7 +115,7 @@ rain_norm <- read.csv(file = "C:\\Users\\John\\Desktop\\R\\rain_norm.csv") %>%
   mutate(date = mdy(date))
 
 obsvred <- ncdc(datasetid = "GHCND", stationid = "GHCND:USW00094823", datatypeid = "PRCP",
-            startdate = "2017-01-01", enddate = "2017-04-30", limit = 1000)
+            startdate = "2017-01-01", enddate = "2017-05-30", limit = 1000)
 
 rain_2017 <- obsvred$data %>%
   mutate(date = ymd_hms(gsub("T"," ",date))) %>%

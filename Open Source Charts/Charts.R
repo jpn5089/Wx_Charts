@@ -47,19 +47,17 @@ FcstAll <- FcstAll %>%
   mutate(day = floor_date(date,unit = "day"),
          hour = hour(date))
 
-slocation <- paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".csv",sep = "")
+slocation <- paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date(),".rds",sep = "")
 
-write.csv(FcstAll, file = slocation)
+saveRDS(FcstAll, file = slocation)
 
-today <- read.csv(slocation) %>%
+today <- readRDS(slocation) %>%
   mutate(datatype = "Today's Forecast")
 
-yesterday <- read.csv(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".csv", sep = "")) %>%
+yesterday <- readRDS(paste("~/GitHub/Wx_Charts/Open Source Charts/Data/Forecast_", Sys.Date()-1,".rds", sep = "")) %>%
   mutate(datatype = "Yesterday's Forecast")
 
 forecasts <- rbind(today, yesterday) %>%
-  select(-X) %>%
-  #select(-X, -X.1) %>%
   mutate(date = ymd_hms(date))
 
 all_normals <-read.csv("~/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
@@ -94,7 +92,7 @@ for (i in 1:5){
     theme(legend.title = element_blank())+
     theme(axis.title.x = element_text(vjust=-0.25))+
     theme(axis.text.x  = element_text(size=7))+
-    theme(plot.caption = element_text(size=9.5))
+    theme(plot.caption = element_text(size=9.5)) +
     scale_x_continuous(breaks = c(seq(0,23,by=3)))
   print(plots)
   ggsave(plots, file = paste("C:\\Users\\John\\Desktop\\Temp_Plots\\Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)

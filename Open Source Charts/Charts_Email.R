@@ -2,12 +2,11 @@ library(RDCOMClient)
 
 OutApp <- COMCreate("Outlook.Application")
 
-
 outMail = OutApp$CreateItem(0)
 
 outMail[["To"]] = "jp19nicola@gmail.com; carlamnicola@msn.com; josephpnicolajr@msn.com; jpnicola@sisterson.com"
 
-outMail[["subject"]] = "Daily Weather Charts"
+outMail[["subject"]] = paste("Daily Weather Charts -", Sys.Date())
 outMail[["body"]] = "See charts attached.
 
 JP"
