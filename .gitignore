@@ -4,10 +4,9 @@ packrat/lib*/
 .Rhistory
 .Rprofile
 .Rdata
-.Rproj
-.opts
-.lock
+*.Rproj
+*.opts
+*.lock
 *.Rda
 .Rproj.user/
-packrat/src/
-packrat/lib*/
+packrat/
