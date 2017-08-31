@@ -26,14 +26,13 @@ library(tibble)
 rwunderground::set_api_key(Sys.getenv("GET_API_KEY"))
 
 Locations <- read.csv("https://raw.githubusercontent.com/jpn5089/Wx_Charts/master/Data/StationNames.csv",stringsAsFactors = FALSE)
-LocationsRow <- c(17,14,34,35)
+LocationsRow <- c(17,14,35)
 cities <- list()
 
-for (i in 1:4){
+for (i in 1:3){
   muggy_wx <- hourly10day(set_location(lat_long = paste(as.character(Locations[LocationsRow[i],8]),",",as.character(Locations[LocationsRow[i],9]),sep = ""))) %>%
     select(date, dew = dew_pt, hum = humidity) %>%
-    mutate(date = ymd_hms(date) - hours(Locations[LocationsRow[i],6])) %>%
-    #mutate(format(date, tz = as.character(Locations[LocationsRow[i],5]))) %>%
+    mutate(date = ymd_hms(date) - hours(Locations[LocationsRow[i],6]) + hours(1)) %>%
     mutate(station = as.character(Locations[LocationsRow[i],1])) %>%
     mutate(dew = as.numeric(dew), datatype = "Forecast")%>%
     mutate(hum = as.numeric(hum), datatype = "Forecast")%>%
@@ -72,9 +71,9 @@ FcstMuggy <- forecasts_muggy %>%
   mutate(date = ymd_hms(date)) %>%
   mutate(day = floor_date(date,unit = "day")) %>%
   filter(floor_date(date,unit ="day") <= ymd(today())+days(4) & floor_date(date,unit ="day") >= ymd(today())+days(1)) %>%
-  filter(station %in% c("KPIT","KTPA","KDRT","KPAPITTS201")) 
+  filter(station %in% c("KPIT","KTPA","KPAPITTS201")) 
 
-for (i in 1:4){
+for (i in 1:3){
   plot1 <- ggplot(filter(FcstMuggy, station == Locations$short[LocationsRow[i]]), aes(x = hour, y = dew, col = datatype, group = datatype, linetype = datatype, size = datatype, alpha = datatype)) +
     geom_line() +
     scale_color_manual(values=c( "dark green","green"))+
