@@ -105,10 +105,9 @@ for (i in 1:3){
     theme(plot.title = element_text(vjust = 2)) +
     theme(legend.title = element_blank())
 
-grid.draw(rbind(ggplotGrob(plot1), ggplotGrob(plot2), size = "last"))
+#grid.draw(rbind(ggplotGrob(plot1), ggplotGrob(plot2), size = "last"))
 
-
-ggsave(plot1, file = paste("C:\\Users\\John\\Desktop\\Muggy_Plots\\Muggy_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
+ggsave(plot1, file = paste("C://Users/johnp/Desktop/Muggy_Charts/Muggy_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
 }
 
 

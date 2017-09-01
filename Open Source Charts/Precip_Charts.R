@@ -59,9 +59,9 @@ FcstPrecip <- forecasts_precip %>%
   mutate(date = ymd_hms(date)) %>%
   mutate(day = floor_date(date,unit = "day")) %>%
   filter(floor_date(date,unit ="day") <= ymd(today())+days(5) & floor_date(date,unit ="day") >= ymd(today())+days(1)) %>%
-  filter(station %in% c("KPIT","KTPA", "KDRT", "KPAPITTS201")) 
+  filter(station %in% c("KPIT","KTPA", "KPAPITTS201")) 
 
-for (i in 1:4){
+for (i in 1:3){
   plot1 <- ggplot(filter(FcstPrecip, station == Locations$short[LocationsRow[i]]),
                   aes(x = hour, y = pop, col = datatype, group = datatype,
                       linetype = datatype, size = datatype, alpha = datatype)) +
@@ -96,10 +96,9 @@ for (i in 1:4){
     theme(plot.title = element_text(vjust = 2)) +
     theme(plot.caption = element_text(size=9.5)) +
     theme(legend.title=element_blank())
-  print(plot2)
   
-  grid.draw(rbind(ggplotGrob(plot1), ggplotGrob(plot2), size = "last"))
+  #grid.draw(rbind(ggplotGrob(plot1), ggplotGrob(plot2), size = "last"))
   
-  ggsave(plot2, file = paste("C:\\Users\\John\\Desktop\\Precip_Plots\\Precip_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
+  ggsave(plot2, file = paste("C://Users/johnp/Desktop/Precip_Charts/Precip_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
 }
 

@@ -93,7 +93,6 @@ for (i in 1:3){
     theme(axis.text.x  = element_text(size=7))+
     theme(plot.caption = element_text(size=9.5)) +
     scale_x_continuous(breaks = c(seq(0,23,by=3)))
-  print(plots)
-  ggsave(plots, file = paste("C:\\Users\\John\\Desktop\\Temp_Plots\\Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
+  ggsave(plots, file = paste("C://Users/johnp/Desktop/Temp_Charts/Temp_Plot_",Locations[LocationsRow[i],3],"_",Sys.Date(),".jpeg",sep = ""), width = 10, height = 7)
 }
 
