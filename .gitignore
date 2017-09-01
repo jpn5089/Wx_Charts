@@ -1,6 +1,7 @@
 packrat/lib*/
 *.csv
 *.jpeg
+*.rds
 .Rhistory
 .Rprofile
 .Rdata
@@ -11,4 +12,4 @@ packrat/lib*/
 .Rproj.user/
 packrat/
 .Rproj.user
-.Rout
+*.Rout
