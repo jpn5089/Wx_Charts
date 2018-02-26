@@ -1,5 +1,7 @@
+#Sys.setenv(JAVA_HOME='C://Program Files/Java/jre1.8.0_144')
+#library(rJava)
+#install_github("rpremraj/mailR")
 library(mailR)
-
 
 sender <- "johnpaulnicola@msn.com"
 
@@ -12,7 +14,7 @@ email <- send.mail(from = sender,
 
 JP",
           smtp = list(host.name = "smtp.gmail.com", port = 25, user.name = "jp19nicola@gmail.com",
-            passwd = "liverpool19", ssl = TRUE, tls = TRUE),
+          passwd = "liverpool19", ssl = TRUE, tls = TRUE),
           authenticate = TRUE,
           send = TRUE,
           attach.files = c(sprintf("C://Users/johnp/Desktop/Temp_Charts/Temp_Plot_Nicola House_%s.jpeg",Sys.Date()),
