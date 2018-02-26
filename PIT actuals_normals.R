@@ -8,7 +8,7 @@ library(ggplot2)
 library(dplyr)
 library(lubridate)
 library(scales)
-library(data.table)
+# library(data.table)
 
 options(noaakey = Sys.getenv("NOAAKEY"))
 

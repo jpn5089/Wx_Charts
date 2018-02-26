@@ -9,20 +9,33 @@
 
 #https://github.com/rudeboybert/fivethirtyeight
 
+devtools::install_github("hrbrmstr/darksky")
 library(darksky)
+library(dplyr)
+library(ggplot2)
 library(purrr)
-library(httr)
 
-# current verison
-packageVersion("darksky")
 
 Sys.getenv("DARKSKY_API_KEY")
 
-station_info <- read.csv(file = "C:\\Users\\John\\Documents\\GitHub\\Wx_Charts\\Data\\isd-history.csv")
+station_info <- read.csv(file = "C:\\Users\\johnp/Documents\\GitHub\\Wx_Charts\\Data\\isd-history.csv") %>% 
+  filter(STATE == "PA")
 
 now <- get_current_forecast(43.2672, -70.8617)
 plot(now)
 forecast <- now$daily
+
+then <- get_forecast_for(43.2672, -70.8617, "2013-05-06T12:00:00-0400", add_headers=TRUE)
+
+then$hourly
+
+print(sprintf("You have used %s API calls.", then$`x-forecast-api-calls`))
+
+seq(Sys.Date()-10, Sys.Date(), "1 day") %>% 
+  map(~get_forecast_for(40.485, -80.2, .x)) %>% 
+  map_df("hourly") %>% 
+  ggplot(aes(x=time, y=windSpeed)) +
+  geom_line()
 
 ########################################################################
 

@@ -21,7 +21,7 @@ cities <- list()
 for (i in 1:3){
   temp_wx <- hourly10day(set_location(lat_long = paste(as.character(Locations[LocationsRow[i],8]),",",as.character(Locations[LocationsRow[i],9]),sep = ""))) %>%
     select(date,value = temp) %>%
-    mutate(date = ymd_hms(date) - hours(Locations[LocationsRow[i],6]) + hours(1)) %>%
+    #mutate(date = with_tz(ymd_hms(date), as.character(Locations[LocationsRow[i],5]))) %>%
     mutate(day = floor_date(date,unit = "day"),
            hour = hour(date)) %>%
            #day2 = day(date),
@@ -61,7 +61,7 @@ forecasts <- rbind(today, yesterday) %>%
 
 all_normals <-read.csv("~/GitHub/Wx_Charts/Data/Temp_Normals.csv", stringsAsFactors = FALSE) %>%
   select(-X) %>%
-  mutate(date = mdy_hm(date)) %>%
+  mutate(date = mdy_hm(date) + years(1)) %>%
   mutate(day = floor_date(date,unit = "day"))
 #  mutate(date = as.character(date))
 
