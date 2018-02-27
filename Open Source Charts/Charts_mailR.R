@@ -14,11 +14,7 @@ email <- send.mail(from = sender,
 
 JP",
           smtp = list(host.name = "smtp.gmail.com", port = 25, user.name = "jp19nicola@gmail.com",
-<<<<<<< HEAD
-          passwd = "liverpool19", ssl = TRUE, tls = TRUE),
-=======
-            passwd = "#####", ssl = TRUE, tls = TRUE),
->>>>>>> 383a789e45dd1c1ce300184052c2b7fd2cf5c40a
+          passwd = "#####", ssl = TRUE, tls = TRUE),
           authenticate = TRUE,
           send = TRUE,
           attach.files = c(sprintf("C://Users/johnp/Desktop/Temp_Charts/Temp_Plot_Nicola House_%s.jpeg",Sys.Date()),

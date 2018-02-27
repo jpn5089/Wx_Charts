@@ -24,11 +24,6 @@ for (i in 1:3){
     #mutate(date = with_tz(ymd_hms(date), as.character(Locations[LocationsRow[i],5]))) %>%
     mutate(day = floor_date(date,unit = "day"),
            hour = hour(date)) %>%
-           #day2 = day(date),
-           #year = year(date),
-           #month = month(date)) %>%
-    #mutate(as.POSIXct(ISOdatetime(year, month, day, hour, 0, 0, tz="GMT")+3600*as.numeric(Locations[LocationsRow[i],6]), tz=as.character(Locations[LocationsRow[i],5]))) %>%
-    #mutate(format(date, tz = as.character(Locations[LocationsRow[i],5]))) %>%
     mutate(station = as.character(Locations[LocationsRow[i],1])) %>%
     mutate(value = as.numeric(value), datatype = "Forecast")%>%
     mutate(date = as.character(date)) %>%
