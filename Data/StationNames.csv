@@ -1,36 +1,37 @@
-short,noaa,City,titles,timezone,hour multiplier,name,latitude,longitude,code
-KABE,GHCND:USW00014737,Allentown,Normal vs Current and Previous Forecast - Allentown,America/New_York,,,,,
-KAOO,GHCND:USW00014736,,,,,,,,
-KAVP,GHCND:USW00014777,,,,,,,,
-KBGM,GHCND:USW00004725,,,,,,,,
-KCAK,GHCND:USW00014895,Akron,Normal vs Current and Previous Forecast - Akron/Alliance,,,,,,
-KCLE,GHCND:USW00014820,Cleveland,Normal vs Current and Previous Forecast - Cleveland,,,,,,
-KCMH,GHCND:USW00014821,Columbus,Normal vs Current and Previous Forecast - Columbus,,,,,,
-KCVG,GHCND:USW00093814,,,,,,,,
-KDAY,GHCND:USW00093815,,,,,,,,
-KERI,GHCND:USW00014860,,,,,,,,
-KIPT,GHCND:USW00014778,,,,,,,,
-KMDT,GHCND:USW00014711,,,,,,,,
-KPHL,GHCND:USW00013739,Philadelphia,Normal vs Current and Previous Forecast - Philadelphia,,,,,,
-KPIT,GHCND:USW00094823,Pittsburgh,Normal vs Current and Previous Forecast - Pittsburgh,America/New_York,5,"Pittsburgh, PA",40.49,-80.23,airport_code
-KRDG,GHCND:USW00014712,,,,,,,,
-KTOL,GHCND:USW00094830,Toledo,Normal vs Current and Previous Forecast - Toledo,,,,,,
-KTPA,GHCND:USW00012842,Tampa,Normal vs Current and Previous Forecast - Tampa,America/New_York,5,,27.962,-82.54,airport_code
-KPIE,GHCND:USW00012873,Clearwater,Normal vs Current and Previous Forecast - Clearwater/St. Pete,,5,,27.9,-82.683,airport_code
-KJAC,GHCND:USW00024156,Jackson Hole,Normal vs Current and Previous Forecast - Jackson Hole,America/Denver,7,,,,airport_code
-KBHB,GHCND:USW00014764,Bar Harbor,Normal vs Current and Previous Forecast - Bar Harbor/Acadia NP,America/New_York,5,,,,airport_code
-KLBB,GHCND:USW00023042,Lubbock,"Normal vs Current and Previous Forecast - Lubbock, TX",US/Central,6,,,,airport_code
-KBOS,,"Boston, MA",,,,"Boston, MA",,,
-KMEM,,"Memphis, TN",,,,"Memphis, TN",,,
-KMSP,,"Minneapolis, MN",,,,"Minneapolis, MN",,,
-KOKC,,"Oklahoma City, OK",,,,"Oklahoma City, OK",,,
-KSLC,,"Salt Lake City, UT",,,,"Salt Lake City, UT",,,
-KBUF,,"Buffalo, NY",,,,"Buffalo, NY",,,
-KLIT,,"Little Rock, AR",,,,"Little Rock, AR",,,
-KBOI,,"Boise, ID",,,,"Boise, ID",,,
-KLGA,,"La Guardia Int't Airport (NYC, NY)",,,,"La Guardia Int't Airport (NYC, NY)",,,
-KDSM,,"Des Moines, IA",,,,"Des Moines, IA",,,
-KMCO,GHCND:USW00012815,Orlando,"Normal vs Current and Previous Forecast - Orlando, FL",America/New_York,,,28.434,-81.325,airport_code
-KDAB,GHCND:USW00022010,Daytona Beach,"Normal vs Current and Previous Forecast - Daytona Beach, FL",America/New_York,,,29.183,-81.048,airport_code
-KDRT,GHCND:USW00012835,Big Bend National Park,Normal vs Current and Previous Forecast - Big Bend National Park,US/Central,5,,29.37,-100.92,airport_code
-KPAPITTS201,,Nicola House,Normal vs Current and Previous Forecast - Nicola House,America/New_York,5,,40.34648,-79.97987,PWS_id
+"","short","noaa","City","titles","timezone","hour.multiplier","name","latitude","longitude","code"
+"1","KABE","GHCND:USW00014737","Allentown","Normal vs Current and Previous Forecast - Allentown","America/New_York",NA,"",NA,NA,""
+"2","KAOO","GHCND:USW00014736","","","",NA,"",NA,NA,""
+"3","KAVP","GHCND:USW00014777","","","",NA,"",NA,NA,""
+"4","KBGM","GHCND:USW00004725","","","",NA,"",NA,NA,""
+"5","KCAK","GHCND:USW00014895","Akron","Normal vs Current and Previous Forecast - Akron/Alliance","",NA,"",NA,NA,""
+"6","KCLE","GHCND:USW00014820","Cleveland","Normal vs Current and Previous Forecast - Cleveland","",NA,"",NA,NA,""
+"7","KCMH","GHCND:USW00014821","Columbus","Normal vs Current and Previous Forecast - Columbus","",NA,"",NA,NA,""
+"8","KCVG","GHCND:USW00093814","","","",NA,"",NA,NA,""
+"9","KDAY","GHCND:USW00093815","","","",NA,"",NA,NA,""
+"10","KERI","GHCND:USW00014860","","","",NA,"",NA,NA,""
+"11","KIPT","GHCND:USW00014778","","","",NA,"",NA,NA,""
+"12","KMDT","GHCND:USW00014711","","","",NA,"",NA,NA,""
+"13","KPHL","GHCND:USW00013739","Philadelphia","Normal vs Current and Previous Forecast - Philadelphia","",NA,"",NA,NA,""
+"14","KPIT","GHCND:USW00094823","Pittsburgh","Normal vs Current and Previous Forecast - Pittsburgh","America/New_York",5,"Pittsburgh, PA",40.49,-80.23,"airport_code"
+"15","KRDG","GHCND:USW00014712","","","",NA,"",NA,NA,""
+"16","KTOL","GHCND:USW00094830","Toledo","Normal vs Current and Previous Forecast - Toledo","",NA,"",NA,NA,""
+"17","KTPA","GHCND:USW00012842","Tampa","Normal vs Current and Previous Forecast - Tampa","America/New_York",5,"",27.962,-82.54,"airport_code"
+"18","KPIE","GHCND:USW00012873","Clearwater","Normal vs Current and Previous Forecast - Clearwater/St. Pete","",5,"",27.9,-82.683,"airport_code"
+"19","KJAC","GHCND:USW00024156","Jackson Hole","Normal vs Current and Previous Forecast - Jackson Hole","America/Denver",7,"",NA,NA,"airport_code"
+"20","KBHB","GHCND:USW00014764","Bar Harbor","Normal vs Current and Previous Forecast - Bar Harbor/Acadia NP","America/New_York",5,"",NA,NA,"airport_code"
+"21","KLBB","GHCND:USW00023042","Lubbock","Normal vs Current and Previous Forecast - Lubbock, TX","US/Central",6,"",NA,NA,"airport_code"
+"22","KBOS","","Boston, MA","","",NA,"Boston, MA",NA,NA,""
+"23","KMEM","","Memphis, TN","","",NA,"Memphis, TN",NA,NA,""
+"24","KMSP","","Minneapolis, MN","","",NA,"Minneapolis, MN",NA,NA,""
+"25","KOKC","","Oklahoma City, OK","","",NA,"Oklahoma City, OK",NA,NA,""
+"26","KSLC","","Salt Lake City, UT","","",NA,"Salt Lake City, UT",NA,NA,""
+"27","KBUF","","Buffalo, NY","","",NA,"Buffalo, NY",NA,NA,""
+"28","KLIT","","Little Rock, AR","","",NA,"Little Rock, AR",NA,NA,""
+"29","KBOI","","Boise, ID","","",NA,"Boise, ID",NA,NA,""
+"30","KLGA","","La Guardia Int't Airport (NYC, NY)","","",NA,"La Guardia Int't Airport (NYC, NY)",NA,NA,""
+"31","KDSM","","Des Moines, IA","","",NA,"Des Moines, IA",NA,NA,""
+"32","KMCO","GHCND:USW00012815","Orlando","Normal vs Current and Previous Forecast - Orlando, FL","America/New_York",NA,"",28.434,-81.325,"airport_code"
+"33","KDAB","GHCND:USW00022010","Daytona Beach","Normal vs Current and Previous Forecast - Daytona Beach, FL","America/New_York",NA,"",29.183,-81.048,"airport_code"
+"34","KDRT","GHCND:USW00012835","Big Bend National Park","Normal vs Current and Previous Forecast - Big Bend National Park","US/Central",5,"",29.37,-100.92,"airport_code"
+"35","KPAPITTS201","","Nicola House","Normal vs Current and Previous Forecast - Nicola House","America/New_York",5,"",40.34648,-79.97987,"PWS_id"
+"36","KARW","GHCND:USW00003822","Beaufort","Normal vs Current and Previous Forecast - Beaufort","America/New_York",NA,NA,32.412,-80.634,NA
